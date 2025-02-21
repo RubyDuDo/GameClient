@@ -8,6 +8,7 @@
 #include "Game.hpp"
 #include <iostream>
 #include <thread>
+#include "Buffer.hpp"
 
 using namespace std;
 
@@ -64,6 +65,11 @@ void CGame::run()
         {
             break;
         }
+        else if( str == "" )
+        {
+            continue;
+        }
+        
         dispatchMsg( Msg(str) );
         
         while( true )
@@ -86,8 +92,16 @@ void CGame::run()
 }
 
 #define receiveBuffSize 1024
+void CGame::onReceiveMsg( const Msg& msg )
+{
+    cout<<"onReceiveMsg:"<< msg.m_strAction.length() <<":"<<msg.m_strAction<<endl;
+    lock_guard lk( m_rmutex);
+    m_rmsgs.push( msg );
+}
+
 void CGame::receiveThread()
 {
+    Buffer recvBuff;
     while( true )
     {
         char buff[receiveBuffSize] {};
@@ -98,10 +112,29 @@ void CGame::receiveThread()
             break;
         }
         else{
-            std::string str( buff );
-            Msg msg( str );
-            lock_guard lk( m_rmutex);
-            m_rmsgs.push( msg );
+            recvBuff.addData( buff, res );
+            //TCP拆包
+            if( recvBuff.getSize() > sizeof( short ) )
+            {
+//                cout<<"getSize:"<<recvBuff.getSize()<<endl;
+                short len = 0;
+                recvBuff.getData( (char*)&len, sizeof(short));
+                len = ntohs( len );
+                if( recvBuff.getSize() >= len + sizeof(short) )
+                {
+                    char msgbuff[receiveBuffSize]{};
+                    recvBuff.consumeData( sizeof( short ) );
+                    recvBuff.getData( msgbuff,  receiveBuffSize );
+                    recvBuff.consumeData( len );
+                    
+                    std::string msg( msgbuff );
+                    
+                    
+                    onReceiveMsg( Msg(msg) );
+                }
+            }
+            
+
         }
     }
 }
@@ -117,6 +150,10 @@ void CGame::sendThread()
             auto msg = m_msgs.front();
             m_msgs.pop();
             
+            short len = msg.m_strAction.length() + 1;
+            len = htons( len );
+            cout<<"send Msg:"<< msg.m_strAction<<std::endl;
+            m_sock->SendData((char*)&len, sizeof(len));
             m_sock->SendData( (char*)msg.m_strAction.c_str(), msg.m_strAction.length() + 1 );
         }
     }

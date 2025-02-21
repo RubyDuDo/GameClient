@@ -18,6 +18,11 @@ public:
     bool addData( char* pData, int len  );
     int getData( char* pBuff, int maxLen);
     void consumeData( int len );
+    
+    int getSize()const;
+    int getAvailableSize() const;
+private:
+    void moveToStart();
 private:
     int m_maxSize;
     char* m_pBuff;
@@ -28,3 +33,4 @@ private:
 };
 
 #endif /* Buffer_hpp */
+

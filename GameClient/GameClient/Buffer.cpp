@@ -16,34 +16,45 @@ Buffer::Buffer( int size ): m_maxSize( size)
     m_tail = 0;
 }
 
+int Buffer::getSize()const
+{
+    return m_tail - m_head;
+}
+
+int Buffer::getAvailableSize() const
+{
+    return m_maxSize - getSize();
+}
+
+void Buffer::moveToStart()
+{
+    memmove( m_pBuff, m_pBuff + m_head, getSize() );
+
+    m_tail = m_tail - m_head;
+    m_head = 0;
+}
 bool Buffer::addData( char* pData, int len  )
 {
-    if( m_tail + len <= m_maxSize )
+    if( len > getAvailableSize() )
     {
-        memcpy( m_pBuff + m_tail, pData, len );
+        return false;
     }
-    else{
-        memcpy( m_pBuff, m_pBuff + m_head, m_tail - m_head );
-        m_tail = m_tail - m_head;
-        m_head = 0;
-        
-        if( m_tail + len <= m_maxSize )
-        {
-            memcpy( m_pBuff + m_tail, pData, len );
-            m_tail += len;
-        }
-        else{
-            return false;
-        }
+    
+    if( m_tail + len > m_maxSize )
+    {
+        moveToStart();
     }
+    memcpy( m_pBuff + m_tail, pData, len );
+    m_tail += len;
+    
     return true;
 }
 
 int Buffer::getData( char* pBuff, int maxLen)
 {
-    int availableLen = m_tail - m_head;
+    int size = getSize();
 
-    int len = std::min( maxLen, availableLen );
+    int len = std::min( maxLen, size );
     memcpy( pBuff, m_pBuff + m_head, len);
     return len ;
     

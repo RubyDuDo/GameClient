@@ -35,7 +35,8 @@ public:
     void sendThread();
     
     int InitNetwork();
-    
+private:
+    void onReceiveMsg( const Msg& msg );
 private:
     std::mutex m_mutex;
     std::queue<Msg> m_msgs;
