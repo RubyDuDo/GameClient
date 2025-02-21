@@ -1,0 +1,13 @@
+# Xcode 用户数据和临时文件夹
+GameClient/GameClient.xcodeproj/xcuserdata/
+*.xcuserdatad
+GameClient/GameClient.xcodeproj/xcuserdata/pinky.xcuserdatad/xcschemes/xcschememanagement.plist
+GameClient/GameClient.xcodeproj/project.xcworkspace/xcuserdata/
+# 也可以更泛一些：
+*.xcuserstate
+*.xcscmblueprint
+*.xcworkspacedata
+
+*.xcuserdatad
+xcuserdata/
+.DS_Store
