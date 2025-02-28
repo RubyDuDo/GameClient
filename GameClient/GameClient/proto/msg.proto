@@ -1,0 +1,53 @@
+syntax = "proto3";
+
+package MyGame;
+
+enum MsgType
+{
+    MsgType_Login = 0;
+    MsgType_Logout = 1;
+    MsgType_Act = 2;
+}
+
+message MsgHead
+{
+    MsgType type = 1;
+}
+
+message RequestLogin
+{
+    MsgHead head = 1;
+    string strName = 2;
+    string strPass = 3;
+}
+
+message ResponseLogin
+{
+    MsgHead head = 1;
+    int32 roleId = 2;
+    int32 roleLevel = 3;
+}
+
+message RequestLogout
+{
+    MsgHead head = 1;
+    int32 roleId = 2;
+}
+
+message ResponseLogout
+{
+    MsgHead head = 1;
+    int32 roleId = 2;
+}
+
+message RequestAct
+{
+    MsgHead head = 1;
+    string action = 2;
+}
+
+message ResponseAct
+{
+    MsgHead head = 1;
+    string action = 2;
+}
