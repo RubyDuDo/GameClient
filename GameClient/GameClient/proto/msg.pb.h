@@ -31,6 +31,7 @@
 #include <google/protobuf/extension_set.h>  // IWYU pragma: export
 #include <google/protobuf/generated_enum_reflection.h>
 #include <google/protobuf/unknown_field_set.h>
+#include <google/protobuf/any.pb.h>
 // @@protoc_insertion_point(includes)
 #include <google/protobuf/port_def.inc>
 #define PROTOBUF_INTERNAL_EXPORT_msg_2eproto
@@ -46,6 +47,9 @@ struct TableStruct_msg_2eproto {
 };
 extern const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_msg_2eproto;
 namespace MyGame {
+class Msg;
+struct MsgDefaultTypeInternal;
+extern MsgDefaultTypeInternal _Msg_default_instance_;
 class MsgHead;
 struct MsgHeadDefaultTypeInternal;
 extern MsgHeadDefaultTypeInternal _MsgHead_default_instance_;
@@ -69,6 +73,7 @@ struct ResponseLogoutDefaultTypeInternal;
 extern ResponseLogoutDefaultTypeInternal _ResponseLogout_default_instance_;
 }  // namespace MyGame
 PROTOBUF_NAMESPACE_OPEN
+template<> ::MyGame::Msg* Arena::CreateMaybeMessage<::MyGame::Msg>(Arena*);
 template<> ::MyGame::MsgHead* Arena::CreateMaybeMessage<::MyGame::MsgHead>(Arena*);
 template<> ::MyGame::RequestAct* Arena::CreateMaybeMessage<::MyGame::RequestAct>(Arena*);
 template<> ::MyGame::RequestLogin* Arena::CreateMaybeMessage<::MyGame::RequestLogin>(Arena*);
@@ -80,14 +85,15 @@ PROTOBUF_NAMESPACE_CLOSE
 namespace MyGame {
 
 enum MsgType : int {
-  MsgType_Login = 0,
-  MsgType_Logout = 1,
-  MsgType_Act = 2,
+  MsgType_Default = 0,
+  MsgType_Login = 1,
+  MsgType_Logout = 2,
+  MsgType_Act = 3,
   MsgType_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::min(),
   MsgType_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::max()
 };
 bool MsgType_IsValid(int value);
-constexpr MsgType MsgType_MIN = MsgType_Login;
+constexpr MsgType MsgType_MIN = MsgType_Default;
 constexpr MsgType MsgType_MAX = MsgType_Act;
 constexpr int MsgType_ARRAYSIZE = MsgType_MAX + 1;
 
@@ -369,11 +375,10 @@ class RequestLogin final :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kStrNameFieldNumber = 2,
-    kStrPassFieldNumber = 3,
-    kHeadFieldNumber = 1,
+    kStrNameFieldNumber = 1,
+    kStrPassFieldNumber = 2,
   };
-  // string strName = 2;
+  // string strName = 1;
   void clear_strname();
   const std::string& strname() const;
   template <typename ArgT0 = const std::string&, typename... ArgT>
@@ -387,7 +392,7 @@ class RequestLogin final :
   std::string* _internal_mutable_strname();
   public:
 
-  // string strPass = 3;
+  // string strPass = 2;
   void clear_strpass();
   const std::string& strpass() const;
   template <typename ArgT0 = const std::string&, typename... ArgT>
@@ -401,24 +406,6 @@ class RequestLogin final :
   std::string* _internal_mutable_strpass();
   public:
 
-  // .MyGame.MsgHead head = 1;
-  bool has_head() const;
-  private:
-  bool _internal_has_head() const;
-  public:
-  void clear_head();
-  const ::MyGame::MsgHead& head() const;
-  PROTOBUF_NODISCARD ::MyGame::MsgHead* release_head();
-  ::MyGame::MsgHead* mutable_head();
-  void set_allocated_head(::MyGame::MsgHead* head);
-  private:
-  const ::MyGame::MsgHead& _internal_head() const;
-  ::MyGame::MsgHead* _internal_mutable_head();
-  public:
-  void unsafe_arena_set_allocated_head(
-      ::MyGame::MsgHead* head);
-  ::MyGame::MsgHead* unsafe_arena_release_head();
-
   // @@protoc_insertion_point(class_scope:MyGame.RequestLogin)
  private:
   class _Internal;
@@ -428,7 +415,6 @@ class RequestLogin final :
   typedef void DestructorSkippable_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr strname_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr strpass_;
-  ::MyGame::MsgHead* head_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_msg_2eproto;
 };
@@ -553,29 +539,10 @@ class ResponseLogin final :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kHeadFieldNumber = 1,
-    kRoleIdFieldNumber = 2,
-    kRoleLevelFieldNumber = 3,
+    kRoleIdFieldNumber = 1,
+    kRoleLevelFieldNumber = 2,
   };
-  // .MyGame.MsgHead head = 1;
-  bool has_head() const;
-  private:
-  bool _internal_has_head() const;
-  public:
-  void clear_head();
-  const ::MyGame::MsgHead& head() const;
-  PROTOBUF_NODISCARD ::MyGame::MsgHead* release_head();
-  ::MyGame::MsgHead* mutable_head();
-  void set_allocated_head(::MyGame::MsgHead* head);
-  private:
-  const ::MyGame::MsgHead& _internal_head() const;
-  ::MyGame::MsgHead* _internal_mutable_head();
-  public:
-  void unsafe_arena_set_allocated_head(
-      ::MyGame::MsgHead* head);
-  ::MyGame::MsgHead* unsafe_arena_release_head();
-
-  // int32 roleId = 2;
+  // int32 roleId = 1;
   void clear_roleid();
   int32_t roleid() const;
   void set_roleid(int32_t value);
@@ -584,7 +551,7 @@ class ResponseLogin final :
   void _internal_set_roleid(int32_t value);
   public:
 
-  // int32 roleLevel = 3;
+  // int32 roleLevel = 2;
   void clear_rolelevel();
   int32_t rolelevel() const;
   void set_rolelevel(int32_t value);
@@ -600,7 +567,6 @@ class ResponseLogin final :
   template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
-  ::MyGame::MsgHead* head_;
   int32_t roleid_;
   int32_t rolelevel_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
@@ -727,28 +693,9 @@ class RequestLogout final :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kHeadFieldNumber = 1,
-    kRoleIdFieldNumber = 2,
+    kRoleIdFieldNumber = 1,
   };
-  // .MyGame.MsgHead head = 1;
-  bool has_head() const;
-  private:
-  bool _internal_has_head() const;
-  public:
-  void clear_head();
-  const ::MyGame::MsgHead& head() const;
-  PROTOBUF_NODISCARD ::MyGame::MsgHead* release_head();
-  ::MyGame::MsgHead* mutable_head();
-  void set_allocated_head(::MyGame::MsgHead* head);
-  private:
-  const ::MyGame::MsgHead& _internal_head() const;
-  ::MyGame::MsgHead* _internal_mutable_head();
-  public:
-  void unsafe_arena_set_allocated_head(
-      ::MyGame::MsgHead* head);
-  ::MyGame::MsgHead* unsafe_arena_release_head();
-
-  // int32 roleId = 2;
+  // int32 roleId = 1;
   void clear_roleid();
   int32_t roleid() const;
   void set_roleid(int32_t value);
@@ -764,7 +711,6 @@ class RequestLogout final :
   template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
-  ::MyGame::MsgHead* head_;
   int32_t roleid_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_msg_2eproto;
@@ -890,28 +836,9 @@ class ResponseLogout final :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kHeadFieldNumber = 1,
-    kRoleIdFieldNumber = 2,
+    kRoleIdFieldNumber = 1,
   };
-  // .MyGame.MsgHead head = 1;
-  bool has_head() const;
-  private:
-  bool _internal_has_head() const;
-  public:
-  void clear_head();
-  const ::MyGame::MsgHead& head() const;
-  PROTOBUF_NODISCARD ::MyGame::MsgHead* release_head();
-  ::MyGame::MsgHead* mutable_head();
-  void set_allocated_head(::MyGame::MsgHead* head);
-  private:
-  const ::MyGame::MsgHead& _internal_head() const;
-  ::MyGame::MsgHead* _internal_mutable_head();
-  public:
-  void unsafe_arena_set_allocated_head(
-      ::MyGame::MsgHead* head);
-  ::MyGame::MsgHead* unsafe_arena_release_head();
-
-  // int32 roleId = 2;
+  // int32 roleId = 1;
   void clear_roleid();
   int32_t roleid() const;
   void set_roleid(int32_t value);
@@ -927,7 +854,6 @@ class ResponseLogout final :
   template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
-  ::MyGame::MsgHead* head_;
   int32_t roleid_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_msg_2eproto;
@@ -1053,10 +979,9 @@ class RequestAct final :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kActionFieldNumber = 2,
-    kHeadFieldNumber = 1,
+    kActionFieldNumber = 1,
   };
-  // string action = 2;
+  // string action = 1;
   void clear_action();
   const std::string& action() const;
   template <typename ArgT0 = const std::string&, typename... ArgT>
@@ -1070,24 +995,6 @@ class RequestAct final :
   std::string* _internal_mutable_action();
   public:
 
-  // .MyGame.MsgHead head = 1;
-  bool has_head() const;
-  private:
-  bool _internal_has_head() const;
-  public:
-  void clear_head();
-  const ::MyGame::MsgHead& head() const;
-  PROTOBUF_NODISCARD ::MyGame::MsgHead* release_head();
-  ::MyGame::MsgHead* mutable_head();
-  void set_allocated_head(::MyGame::MsgHead* head);
-  private:
-  const ::MyGame::MsgHead& _internal_head() const;
-  ::MyGame::MsgHead* _internal_mutable_head();
-  public:
-  void unsafe_arena_set_allocated_head(
-      ::MyGame::MsgHead* head);
-  ::MyGame::MsgHead* unsafe_arena_release_head();
-
   // @@protoc_insertion_point(class_scope:MyGame.RequestAct)
  private:
   class _Internal;
@@ -1096,7 +1003,6 @@ class RequestAct final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr action_;
-  ::MyGame::MsgHead* head_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_msg_2eproto;
 };
@@ -1221,10 +1127,9 @@ class ResponseAct final :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kActionFieldNumber = 2,
-    kHeadFieldNumber = 1,
+    kActionFieldNumber = 1,
   };
-  // string action = 2;
+  // string action = 1;
   void clear_action();
   const std::string& action() const;
   template <typename ArgT0 = const std::string&, typename... ArgT>
@@ -1238,6 +1143,141 @@ class ResponseAct final :
   std::string* _internal_mutable_action();
   public:
 
+  // @@protoc_insertion_point(class_scope:MyGame.ResponseAct)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr action_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_msg_2eproto;
+};
+// -------------------------------------------------------------------
+
+class Msg final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:MyGame.Msg) */ {
+ public:
+  inline Msg() : Msg(nullptr) {}
+  ~Msg() override;
+  explicit PROTOBUF_CONSTEXPR Msg(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  Msg(const Msg& from);
+  Msg(Msg&& from) noexcept
+    : Msg() {
+    *this = ::std::move(from);
+  }
+
+  inline Msg& operator=(const Msg& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline Msg& operator=(Msg&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const Msg& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const Msg* internal_default_instance() {
+    return reinterpret_cast<const Msg*>(
+               &_Msg_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    7;
+
+  friend void swap(Msg& a, Msg& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(Msg* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(Msg* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  Msg* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<Msg>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CopyFrom(const Msg& from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  void MergeFrom(const Msg& from);
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message* to, const ::PROTOBUF_NAMESPACE_ID::Message& from);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  uint8_t* _InternalSerialize(
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(Msg* other);
+
+  private:
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "MyGame.Msg";
+  }
+  protected:
+  explicit Msg(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                       bool is_message_owned = false);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kHeadFieldNumber = 1,
+    kPayloadFieldNumber = 2,
+  };
   // .MyGame.MsgHead head = 1;
   bool has_head() const;
   private:
@@ -1256,15 +1296,33 @@ class ResponseAct final :
       ::MyGame::MsgHead* head);
   ::MyGame::MsgHead* unsafe_arena_release_head();
 
-  // @@protoc_insertion_point(class_scope:MyGame.ResponseAct)
+  // .google.protobuf.Any payload = 2;
+  bool has_payload() const;
+  private:
+  bool _internal_has_payload() const;
+  public:
+  void clear_payload();
+  const ::PROTOBUF_NAMESPACE_ID::Any& payload() const;
+  PROTOBUF_NODISCARD ::PROTOBUF_NAMESPACE_ID::Any* release_payload();
+  ::PROTOBUF_NAMESPACE_ID::Any* mutable_payload();
+  void set_allocated_payload(::PROTOBUF_NAMESPACE_ID::Any* payload);
+  private:
+  const ::PROTOBUF_NAMESPACE_ID::Any& _internal_payload() const;
+  ::PROTOBUF_NAMESPACE_ID::Any* _internal_mutable_payload();
+  public:
+  void unsafe_arena_set_allocated_payload(
+      ::PROTOBUF_NAMESPACE_ID::Any* payload);
+  ::PROTOBUF_NAMESPACE_ID::Any* unsafe_arena_release_payload();
+
+  // @@protoc_insertion_point(class_scope:MyGame.Msg)
  private:
   class _Internal;
 
   template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
-  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr action_;
   ::MyGame::MsgHead* head_;
+  ::PROTOBUF_NAMESPACE_ID::Any* payload_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_msg_2eproto;
 };
@@ -1303,97 +1361,7 @@ inline void MsgHead::set_type(::MyGame::MsgType value) {
 
 // RequestLogin
 
-// .MyGame.MsgHead head = 1;
-inline bool RequestLogin::_internal_has_head() const {
-  return this != internal_default_instance() && head_ != nullptr;
-}
-inline bool RequestLogin::has_head() const {
-  return _internal_has_head();
-}
-inline void RequestLogin::clear_head() {
-  if (GetArenaForAllocation() == nullptr && head_ != nullptr) {
-    delete head_;
-  }
-  head_ = nullptr;
-}
-inline const ::MyGame::MsgHead& RequestLogin::_internal_head() const {
-  const ::MyGame::MsgHead* p = head_;
-  return p != nullptr ? *p : reinterpret_cast<const ::MyGame::MsgHead&>(
-      ::MyGame::_MsgHead_default_instance_);
-}
-inline const ::MyGame::MsgHead& RequestLogin::head() const {
-  // @@protoc_insertion_point(field_get:MyGame.RequestLogin.head)
-  return _internal_head();
-}
-inline void RequestLogin::unsafe_arena_set_allocated_head(
-    ::MyGame::MsgHead* head) {
-  if (GetArenaForAllocation() == nullptr) {
-    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(head_);
-  }
-  head_ = head;
-  if (head) {
-    
-  } else {
-    
-  }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:MyGame.RequestLogin.head)
-}
-inline ::MyGame::MsgHead* RequestLogin::release_head() {
-  
-  ::MyGame::MsgHead* temp = head_;
-  head_ = nullptr;
-#ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
-  auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
-  temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
-  if (GetArenaForAllocation() == nullptr) { delete old; }
-#else  // PROTOBUF_FORCE_COPY_IN_RELEASE
-  if (GetArenaForAllocation() != nullptr) {
-    temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
-  }
-#endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
-  return temp;
-}
-inline ::MyGame::MsgHead* RequestLogin::unsafe_arena_release_head() {
-  // @@protoc_insertion_point(field_release:MyGame.RequestLogin.head)
-  
-  ::MyGame::MsgHead* temp = head_;
-  head_ = nullptr;
-  return temp;
-}
-inline ::MyGame::MsgHead* RequestLogin::_internal_mutable_head() {
-  
-  if (head_ == nullptr) {
-    auto* p = CreateMaybeMessage<::MyGame::MsgHead>(GetArenaForAllocation());
-    head_ = p;
-  }
-  return head_;
-}
-inline ::MyGame::MsgHead* RequestLogin::mutable_head() {
-  ::MyGame::MsgHead* _msg = _internal_mutable_head();
-  // @@protoc_insertion_point(field_mutable:MyGame.RequestLogin.head)
-  return _msg;
-}
-inline void RequestLogin::set_allocated_head(::MyGame::MsgHead* head) {
-  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
-  if (message_arena == nullptr) {
-    delete head_;
-  }
-  if (head) {
-    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
-        ::PROTOBUF_NAMESPACE_ID::Arena::InternalGetOwningArena(head);
-    if (message_arena != submessage_arena) {
-      head = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
-          message_arena, head, submessage_arena);
-    }
-    
-  } else {
-    
-  }
-  head_ = head;
-  // @@protoc_insertion_point(field_set_allocated:MyGame.RequestLogin.head)
-}
-
-// string strName = 2;
+// string strName = 1;
 inline void RequestLogin::clear_strname() {
   strname_.ClearToEmpty();
 }
@@ -1443,7 +1411,7 @@ inline void RequestLogin::set_allocated_strname(std::string* strname) {
   // @@protoc_insertion_point(field_set_allocated:MyGame.RequestLogin.strName)
 }
 
-// string strPass = 3;
+// string strPass = 2;
 inline void RequestLogin::clear_strpass() {
   strpass_.ClearToEmpty();
 }
@@ -1497,97 +1465,7 @@ inline void RequestLogin::set_allocated_strpass(std::string* strpass) {
 
 // ResponseLogin
 
-// .MyGame.MsgHead head = 1;
-inline bool ResponseLogin::_internal_has_head() const {
-  return this != internal_default_instance() && head_ != nullptr;
-}
-inline bool ResponseLogin::has_head() const {
-  return _internal_has_head();
-}
-inline void ResponseLogin::clear_head() {
-  if (GetArenaForAllocation() == nullptr && head_ != nullptr) {
-    delete head_;
-  }
-  head_ = nullptr;
-}
-inline const ::MyGame::MsgHead& ResponseLogin::_internal_head() const {
-  const ::MyGame::MsgHead* p = head_;
-  return p != nullptr ? *p : reinterpret_cast<const ::MyGame::MsgHead&>(
-      ::MyGame::_MsgHead_default_instance_);
-}
-inline const ::MyGame::MsgHead& ResponseLogin::head() const {
-  // @@protoc_insertion_point(field_get:MyGame.ResponseLogin.head)
-  return _internal_head();
-}
-inline void ResponseLogin::unsafe_arena_set_allocated_head(
-    ::MyGame::MsgHead* head) {
-  if (GetArenaForAllocation() == nullptr) {
-    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(head_);
-  }
-  head_ = head;
-  if (head) {
-    
-  } else {
-    
-  }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:MyGame.ResponseLogin.head)
-}
-inline ::MyGame::MsgHead* ResponseLogin::release_head() {
-  
-  ::MyGame::MsgHead* temp = head_;
-  head_ = nullptr;
-#ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
-  auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
-  temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
-  if (GetArenaForAllocation() == nullptr) { delete old; }
-#else  // PROTOBUF_FORCE_COPY_IN_RELEASE
-  if (GetArenaForAllocation() != nullptr) {
-    temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
-  }
-#endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
-  return temp;
-}
-inline ::MyGame::MsgHead* ResponseLogin::unsafe_arena_release_head() {
-  // @@protoc_insertion_point(field_release:MyGame.ResponseLogin.head)
-  
-  ::MyGame::MsgHead* temp = head_;
-  head_ = nullptr;
-  return temp;
-}
-inline ::MyGame::MsgHead* ResponseLogin::_internal_mutable_head() {
-  
-  if (head_ == nullptr) {
-    auto* p = CreateMaybeMessage<::MyGame::MsgHead>(GetArenaForAllocation());
-    head_ = p;
-  }
-  return head_;
-}
-inline ::MyGame::MsgHead* ResponseLogin::mutable_head() {
-  ::MyGame::MsgHead* _msg = _internal_mutable_head();
-  // @@protoc_insertion_point(field_mutable:MyGame.ResponseLogin.head)
-  return _msg;
-}
-inline void ResponseLogin::set_allocated_head(::MyGame::MsgHead* head) {
-  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
-  if (message_arena == nullptr) {
-    delete head_;
-  }
-  if (head) {
-    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
-        ::PROTOBUF_NAMESPACE_ID::Arena::InternalGetOwningArena(head);
-    if (message_arena != submessage_arena) {
-      head = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
-          message_arena, head, submessage_arena);
-    }
-    
-  } else {
-    
-  }
-  head_ = head;
-  // @@protoc_insertion_point(field_set_allocated:MyGame.ResponseLogin.head)
-}
-
-// int32 roleId = 2;
+// int32 roleId = 1;
 inline void ResponseLogin::clear_roleid() {
   roleid_ = 0;
 }
@@ -1607,7 +1485,7 @@ inline void ResponseLogin::set_roleid(int32_t value) {
   // @@protoc_insertion_point(field_set:MyGame.ResponseLogin.roleId)
 }
 
-// int32 roleLevel = 3;
+// int32 roleLevel = 2;
 inline void ResponseLogin::clear_rolelevel() {
   rolelevel_ = 0;
 }
@@ -1631,97 +1509,7 @@ inline void ResponseLogin::set_rolelevel(int32_t value) {
 
 // RequestLogout
 
-// .MyGame.MsgHead head = 1;
-inline bool RequestLogout::_internal_has_head() const {
-  return this != internal_default_instance() && head_ != nullptr;
-}
-inline bool RequestLogout::has_head() const {
-  return _internal_has_head();
-}
-inline void RequestLogout::clear_head() {
-  if (GetArenaForAllocation() == nullptr && head_ != nullptr) {
-    delete head_;
-  }
-  head_ = nullptr;
-}
-inline const ::MyGame::MsgHead& RequestLogout::_internal_head() const {
-  const ::MyGame::MsgHead* p = head_;
-  return p != nullptr ? *p : reinterpret_cast<const ::MyGame::MsgHead&>(
-      ::MyGame::_MsgHead_default_instance_);
-}
-inline const ::MyGame::MsgHead& RequestLogout::head() const {
-  // @@protoc_insertion_point(field_get:MyGame.RequestLogout.head)
-  return _internal_head();
-}
-inline void RequestLogout::unsafe_arena_set_allocated_head(
-    ::MyGame::MsgHead* head) {
-  if (GetArenaForAllocation() == nullptr) {
-    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(head_);
-  }
-  head_ = head;
-  if (head) {
-    
-  } else {
-    
-  }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:MyGame.RequestLogout.head)
-}
-inline ::MyGame::MsgHead* RequestLogout::release_head() {
-  
-  ::MyGame::MsgHead* temp = head_;
-  head_ = nullptr;
-#ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
-  auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
-  temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
-  if (GetArenaForAllocation() == nullptr) { delete old; }
-#else  // PROTOBUF_FORCE_COPY_IN_RELEASE
-  if (GetArenaForAllocation() != nullptr) {
-    temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
-  }
-#endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
-  return temp;
-}
-inline ::MyGame::MsgHead* RequestLogout::unsafe_arena_release_head() {
-  // @@protoc_insertion_point(field_release:MyGame.RequestLogout.head)
-  
-  ::MyGame::MsgHead* temp = head_;
-  head_ = nullptr;
-  return temp;
-}
-inline ::MyGame::MsgHead* RequestLogout::_internal_mutable_head() {
-  
-  if (head_ == nullptr) {
-    auto* p = CreateMaybeMessage<::MyGame::MsgHead>(GetArenaForAllocation());
-    head_ = p;
-  }
-  return head_;
-}
-inline ::MyGame::MsgHead* RequestLogout::mutable_head() {
-  ::MyGame::MsgHead* _msg = _internal_mutable_head();
-  // @@protoc_insertion_point(field_mutable:MyGame.RequestLogout.head)
-  return _msg;
-}
-inline void RequestLogout::set_allocated_head(::MyGame::MsgHead* head) {
-  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
-  if (message_arena == nullptr) {
-    delete head_;
-  }
-  if (head) {
-    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
-        ::PROTOBUF_NAMESPACE_ID::Arena::InternalGetOwningArena(head);
-    if (message_arena != submessage_arena) {
-      head = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
-          message_arena, head, submessage_arena);
-    }
-    
-  } else {
-    
-  }
-  head_ = head;
-  // @@protoc_insertion_point(field_set_allocated:MyGame.RequestLogout.head)
-}
-
-// int32 roleId = 2;
+// int32 roleId = 1;
 inline void RequestLogout::clear_roleid() {
   roleid_ = 0;
 }
@@ -1745,97 +1533,7 @@ inline void RequestLogout::set_roleid(int32_t value) {
 
 // ResponseLogout
 
-// .MyGame.MsgHead head = 1;
-inline bool ResponseLogout::_internal_has_head() const {
-  return this != internal_default_instance() && head_ != nullptr;
-}
-inline bool ResponseLogout::has_head() const {
-  return _internal_has_head();
-}
-inline void ResponseLogout::clear_head() {
-  if (GetArenaForAllocation() == nullptr && head_ != nullptr) {
-    delete head_;
-  }
-  head_ = nullptr;
-}
-inline const ::MyGame::MsgHead& ResponseLogout::_internal_head() const {
-  const ::MyGame::MsgHead* p = head_;
-  return p != nullptr ? *p : reinterpret_cast<const ::MyGame::MsgHead&>(
-      ::MyGame::_MsgHead_default_instance_);
-}
-inline const ::MyGame::MsgHead& ResponseLogout::head() const {
-  // @@protoc_insertion_point(field_get:MyGame.ResponseLogout.head)
-  return _internal_head();
-}
-inline void ResponseLogout::unsafe_arena_set_allocated_head(
-    ::MyGame::MsgHead* head) {
-  if (GetArenaForAllocation() == nullptr) {
-    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(head_);
-  }
-  head_ = head;
-  if (head) {
-    
-  } else {
-    
-  }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:MyGame.ResponseLogout.head)
-}
-inline ::MyGame::MsgHead* ResponseLogout::release_head() {
-  
-  ::MyGame::MsgHead* temp = head_;
-  head_ = nullptr;
-#ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
-  auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
-  temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
-  if (GetArenaForAllocation() == nullptr) { delete old; }
-#else  // PROTOBUF_FORCE_COPY_IN_RELEASE
-  if (GetArenaForAllocation() != nullptr) {
-    temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
-  }
-#endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
-  return temp;
-}
-inline ::MyGame::MsgHead* ResponseLogout::unsafe_arena_release_head() {
-  // @@protoc_insertion_point(field_release:MyGame.ResponseLogout.head)
-  
-  ::MyGame::MsgHead* temp = head_;
-  head_ = nullptr;
-  return temp;
-}
-inline ::MyGame::MsgHead* ResponseLogout::_internal_mutable_head() {
-  
-  if (head_ == nullptr) {
-    auto* p = CreateMaybeMessage<::MyGame::MsgHead>(GetArenaForAllocation());
-    head_ = p;
-  }
-  return head_;
-}
-inline ::MyGame::MsgHead* ResponseLogout::mutable_head() {
-  ::MyGame::MsgHead* _msg = _internal_mutable_head();
-  // @@protoc_insertion_point(field_mutable:MyGame.ResponseLogout.head)
-  return _msg;
-}
-inline void ResponseLogout::set_allocated_head(::MyGame::MsgHead* head) {
-  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
-  if (message_arena == nullptr) {
-    delete head_;
-  }
-  if (head) {
-    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
-        ::PROTOBUF_NAMESPACE_ID::Arena::InternalGetOwningArena(head);
-    if (message_arena != submessage_arena) {
-      head = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
-          message_arena, head, submessage_arena);
-    }
-    
-  } else {
-    
-  }
-  head_ = head;
-  // @@protoc_insertion_point(field_set_allocated:MyGame.ResponseLogout.head)
-}
-
-// int32 roleId = 2;
+// int32 roleId = 1;
 inline void ResponseLogout::clear_roleid() {
   roleid_ = 0;
 }
@@ -1859,97 +1557,7 @@ inline void ResponseLogout::set_roleid(int32_t value) {
 
 // RequestAct
 
-// .MyGame.MsgHead head = 1;
-inline bool RequestAct::_internal_has_head() const {
-  return this != internal_default_instance() && head_ != nullptr;
-}
-inline bool RequestAct::has_head() const {
-  return _internal_has_head();
-}
-inline void RequestAct::clear_head() {
-  if (GetArenaForAllocation() == nullptr && head_ != nullptr) {
-    delete head_;
-  }
-  head_ = nullptr;
-}
-inline const ::MyGame::MsgHead& RequestAct::_internal_head() const {
-  const ::MyGame::MsgHead* p = head_;
-  return p != nullptr ? *p : reinterpret_cast<const ::MyGame::MsgHead&>(
-      ::MyGame::_MsgHead_default_instance_);
-}
-inline const ::MyGame::MsgHead& RequestAct::head() const {
-  // @@protoc_insertion_point(field_get:MyGame.RequestAct.head)
-  return _internal_head();
-}
-inline void RequestAct::unsafe_arena_set_allocated_head(
-    ::MyGame::MsgHead* head) {
-  if (GetArenaForAllocation() == nullptr) {
-    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(head_);
-  }
-  head_ = head;
-  if (head) {
-    
-  } else {
-    
-  }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:MyGame.RequestAct.head)
-}
-inline ::MyGame::MsgHead* RequestAct::release_head() {
-  
-  ::MyGame::MsgHead* temp = head_;
-  head_ = nullptr;
-#ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
-  auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
-  temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
-  if (GetArenaForAllocation() == nullptr) { delete old; }
-#else  // PROTOBUF_FORCE_COPY_IN_RELEASE
-  if (GetArenaForAllocation() != nullptr) {
-    temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
-  }
-#endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
-  return temp;
-}
-inline ::MyGame::MsgHead* RequestAct::unsafe_arena_release_head() {
-  // @@protoc_insertion_point(field_release:MyGame.RequestAct.head)
-  
-  ::MyGame::MsgHead* temp = head_;
-  head_ = nullptr;
-  return temp;
-}
-inline ::MyGame::MsgHead* RequestAct::_internal_mutable_head() {
-  
-  if (head_ == nullptr) {
-    auto* p = CreateMaybeMessage<::MyGame::MsgHead>(GetArenaForAllocation());
-    head_ = p;
-  }
-  return head_;
-}
-inline ::MyGame::MsgHead* RequestAct::mutable_head() {
-  ::MyGame::MsgHead* _msg = _internal_mutable_head();
-  // @@protoc_insertion_point(field_mutable:MyGame.RequestAct.head)
-  return _msg;
-}
-inline void RequestAct::set_allocated_head(::MyGame::MsgHead* head) {
-  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
-  if (message_arena == nullptr) {
-    delete head_;
-  }
-  if (head) {
-    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
-        ::PROTOBUF_NAMESPACE_ID::Arena::InternalGetOwningArena(head);
-    if (message_arena != submessage_arena) {
-      head = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
-          message_arena, head, submessage_arena);
-    }
-    
-  } else {
-    
-  }
-  head_ = head;
-  // @@protoc_insertion_point(field_set_allocated:MyGame.RequestAct.head)
-}
-
-// string action = 2;
+// string action = 1;
 inline void RequestAct::clear_action() {
   action_.ClearToEmpty();
 }
@@ -2003,97 +1611,7 @@ inline void RequestAct::set_allocated_action(std::string* action) {
 
 // ResponseAct
 
-// .MyGame.MsgHead head = 1;
-inline bool ResponseAct::_internal_has_head() const {
-  return this != internal_default_instance() && head_ != nullptr;
-}
-inline bool ResponseAct::has_head() const {
-  return _internal_has_head();
-}
-inline void ResponseAct::clear_head() {
-  if (GetArenaForAllocation() == nullptr && head_ != nullptr) {
-    delete head_;
-  }
-  head_ = nullptr;
-}
-inline const ::MyGame::MsgHead& ResponseAct::_internal_head() const {
-  const ::MyGame::MsgHead* p = head_;
-  return p != nullptr ? *p : reinterpret_cast<const ::MyGame::MsgHead&>(
-      ::MyGame::_MsgHead_default_instance_);
-}
-inline const ::MyGame::MsgHead& ResponseAct::head() const {
-  // @@protoc_insertion_point(field_get:MyGame.ResponseAct.head)
-  return _internal_head();
-}
-inline void ResponseAct::unsafe_arena_set_allocated_head(
-    ::MyGame::MsgHead* head) {
-  if (GetArenaForAllocation() == nullptr) {
-    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(head_);
-  }
-  head_ = head;
-  if (head) {
-    
-  } else {
-    
-  }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:MyGame.ResponseAct.head)
-}
-inline ::MyGame::MsgHead* ResponseAct::release_head() {
-  
-  ::MyGame::MsgHead* temp = head_;
-  head_ = nullptr;
-#ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
-  auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
-  temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
-  if (GetArenaForAllocation() == nullptr) { delete old; }
-#else  // PROTOBUF_FORCE_COPY_IN_RELEASE
-  if (GetArenaForAllocation() != nullptr) {
-    temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
-  }
-#endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
-  return temp;
-}
-inline ::MyGame::MsgHead* ResponseAct::unsafe_arena_release_head() {
-  // @@protoc_insertion_point(field_release:MyGame.ResponseAct.head)
-  
-  ::MyGame::MsgHead* temp = head_;
-  head_ = nullptr;
-  return temp;
-}
-inline ::MyGame::MsgHead* ResponseAct::_internal_mutable_head() {
-  
-  if (head_ == nullptr) {
-    auto* p = CreateMaybeMessage<::MyGame::MsgHead>(GetArenaForAllocation());
-    head_ = p;
-  }
-  return head_;
-}
-inline ::MyGame::MsgHead* ResponseAct::mutable_head() {
-  ::MyGame::MsgHead* _msg = _internal_mutable_head();
-  // @@protoc_insertion_point(field_mutable:MyGame.ResponseAct.head)
-  return _msg;
-}
-inline void ResponseAct::set_allocated_head(::MyGame::MsgHead* head) {
-  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
-  if (message_arena == nullptr) {
-    delete head_;
-  }
-  if (head) {
-    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
-        ::PROTOBUF_NAMESPACE_ID::Arena::InternalGetOwningArena(head);
-    if (message_arena != submessage_arena) {
-      head = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
-          message_arena, head, submessage_arena);
-    }
-    
-  } else {
-    
-  }
-  head_ = head;
-  // @@protoc_insertion_point(field_set_allocated:MyGame.ResponseAct.head)
-}
-
-// string action = 2;
+// string action = 1;
 inline void ResponseAct::clear_action() {
   action_.ClearToEmpty();
 }
@@ -2143,9 +1661,190 @@ inline void ResponseAct::set_allocated_action(std::string* action) {
   // @@protoc_insertion_point(field_set_allocated:MyGame.ResponseAct.action)
 }
 
+// -------------------------------------------------------------------
+
+// Msg
+
+// .MyGame.MsgHead head = 1;
+inline bool Msg::_internal_has_head() const {
+  return this != internal_default_instance() && head_ != nullptr;
+}
+inline bool Msg::has_head() const {
+  return _internal_has_head();
+}
+inline void Msg::clear_head() {
+  if (GetArenaForAllocation() == nullptr && head_ != nullptr) {
+    delete head_;
+  }
+  head_ = nullptr;
+}
+inline const ::MyGame::MsgHead& Msg::_internal_head() const {
+  const ::MyGame::MsgHead* p = head_;
+  return p != nullptr ? *p : reinterpret_cast<const ::MyGame::MsgHead&>(
+      ::MyGame::_MsgHead_default_instance_);
+}
+inline const ::MyGame::MsgHead& Msg::head() const {
+  // @@protoc_insertion_point(field_get:MyGame.Msg.head)
+  return _internal_head();
+}
+inline void Msg::unsafe_arena_set_allocated_head(
+    ::MyGame::MsgHead* head) {
+  if (GetArenaForAllocation() == nullptr) {
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(head_);
+  }
+  head_ = head;
+  if (head) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:MyGame.Msg.head)
+}
+inline ::MyGame::MsgHead* Msg::release_head() {
+  
+  ::MyGame::MsgHead* temp = head_;
+  head_ = nullptr;
+#ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
+  auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
+  temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  if (GetArenaForAllocation() == nullptr) { delete old; }
+#else  // PROTOBUF_FORCE_COPY_IN_RELEASE
+  if (GetArenaForAllocation() != nullptr) {
+    temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  }
+#endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
+  return temp;
+}
+inline ::MyGame::MsgHead* Msg::unsafe_arena_release_head() {
+  // @@protoc_insertion_point(field_release:MyGame.Msg.head)
+  
+  ::MyGame::MsgHead* temp = head_;
+  head_ = nullptr;
+  return temp;
+}
+inline ::MyGame::MsgHead* Msg::_internal_mutable_head() {
+  
+  if (head_ == nullptr) {
+    auto* p = CreateMaybeMessage<::MyGame::MsgHead>(GetArenaForAllocation());
+    head_ = p;
+  }
+  return head_;
+}
+inline ::MyGame::MsgHead* Msg::mutable_head() {
+  ::MyGame::MsgHead* _msg = _internal_mutable_head();
+  // @@protoc_insertion_point(field_mutable:MyGame.Msg.head)
+  return _msg;
+}
+inline void Msg::set_allocated_head(::MyGame::MsgHead* head) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
+  if (message_arena == nullptr) {
+    delete head_;
+  }
+  if (head) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
+        ::PROTOBUF_NAMESPACE_ID::Arena::InternalGetOwningArena(head);
+    if (message_arena != submessage_arena) {
+      head = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, head, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  head_ = head;
+  // @@protoc_insertion_point(field_set_allocated:MyGame.Msg.head)
+}
+
+// .google.protobuf.Any payload = 2;
+inline bool Msg::_internal_has_payload() const {
+  return this != internal_default_instance() && payload_ != nullptr;
+}
+inline bool Msg::has_payload() const {
+  return _internal_has_payload();
+}
+inline const ::PROTOBUF_NAMESPACE_ID::Any& Msg::_internal_payload() const {
+  const ::PROTOBUF_NAMESPACE_ID::Any* p = payload_;
+  return p != nullptr ? *p : reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Any&>(
+      ::PROTOBUF_NAMESPACE_ID::_Any_default_instance_);
+}
+inline const ::PROTOBUF_NAMESPACE_ID::Any& Msg::payload() const {
+  // @@protoc_insertion_point(field_get:MyGame.Msg.payload)
+  return _internal_payload();
+}
+inline void Msg::unsafe_arena_set_allocated_payload(
+    ::PROTOBUF_NAMESPACE_ID::Any* payload) {
+  if (GetArenaForAllocation() == nullptr) {
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(payload_);
+  }
+  payload_ = payload;
+  if (payload) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:MyGame.Msg.payload)
+}
+inline ::PROTOBUF_NAMESPACE_ID::Any* Msg::release_payload() {
+  
+  ::PROTOBUF_NAMESPACE_ID::Any* temp = payload_;
+  payload_ = nullptr;
+#ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
+  auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
+  temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  if (GetArenaForAllocation() == nullptr) { delete old; }
+#else  // PROTOBUF_FORCE_COPY_IN_RELEASE
+  if (GetArenaForAllocation() != nullptr) {
+    temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  }
+#endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
+  return temp;
+}
+inline ::PROTOBUF_NAMESPACE_ID::Any* Msg::unsafe_arena_release_payload() {
+  // @@protoc_insertion_point(field_release:MyGame.Msg.payload)
+  
+  ::PROTOBUF_NAMESPACE_ID::Any* temp = payload_;
+  payload_ = nullptr;
+  return temp;
+}
+inline ::PROTOBUF_NAMESPACE_ID::Any* Msg::_internal_mutable_payload() {
+  
+  if (payload_ == nullptr) {
+    auto* p = CreateMaybeMessage<::PROTOBUF_NAMESPACE_ID::Any>(GetArenaForAllocation());
+    payload_ = p;
+  }
+  return payload_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::Any* Msg::mutable_payload() {
+  ::PROTOBUF_NAMESPACE_ID::Any* _msg = _internal_mutable_payload();
+  // @@protoc_insertion_point(field_mutable:MyGame.Msg.payload)
+  return _msg;
+}
+inline void Msg::set_allocated_payload(::PROTOBUF_NAMESPACE_ID::Any* payload) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
+  if (message_arena == nullptr) {
+    delete reinterpret_cast< ::PROTOBUF_NAMESPACE_ID::MessageLite*>(payload_);
+  }
+  if (payload) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
+        ::PROTOBUF_NAMESPACE_ID::Arena::InternalGetOwningArena(
+                reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(payload));
+    if (message_arena != submessage_arena) {
+      payload = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, payload, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  payload_ = payload;
+  // @@protoc_insertion_point(field_set_allocated:MyGame.Msg.payload)
+}
+
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

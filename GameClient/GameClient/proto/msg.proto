@@ -1,12 +1,13 @@
 syntax = "proto3";
-
+import "google/protobuf/any.proto";
 package MyGame;
 
 enum MsgType
 {
-    MsgType_Login = 0;
-    MsgType_Logout = 1;
-    MsgType_Act = 2;
+    MsgType_Default = 0;
+    MsgType_Login = 1;
+    MsgType_Logout = 2;
+    MsgType_Act = 3;
 }
 
 message MsgHead
@@ -16,38 +17,38 @@ message MsgHead
 
 message RequestLogin
 {
-    MsgHead head = 1;
-    string strName = 2;
-    string strPass = 3;
+    string strName = 1;
+    string strPass = 2;
 }
 
 message ResponseLogin
 {
-    MsgHead head = 1;
-    int32 roleId = 2;
-    int32 roleLevel = 3;
+    int32 roleId = 1;
+    int32 roleLevel = 2;
 }
 
 message RequestLogout
 {
-    MsgHead head = 1;
-    int32 roleId = 2;
+    int32 roleId = 1;
 }
 
 message ResponseLogout
 {
-    MsgHead head = 1;
-    int32 roleId = 2;
+    int32 roleId = 1;
 }
 
 message RequestAct
 {
-    MsgHead head = 1;
-    string action = 2;
+    string action = 1;
 }
 
 message ResponseAct
 {
+    string action = 1;
+}
+
+message Msg
+{
     MsgHead head = 1;
-    string action = 2;
+    google.protobuf.Any payload = 2;
 }

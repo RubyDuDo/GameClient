@@ -27,9 +27,22 @@
 		BED530BA2D668A30008AE16A /* GameClient */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = GameClient; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		BEC12F052D719A0200EA4DB2 /* Exceptions for "GameClient" folder in "GameClient" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				proto/msg.proto,
+			);
+			target = BED530B92D668A30008AE16A /* GameClient */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		BED530BC2D668A30008AE16A /* GameClient */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				BEC12F052D719A0200EA4DB2 /* Exceptions for "GameClient" folder in "GameClient" target */,
+			);
 			path = GameClient;
 			sourceTree = "<group>";
 		};

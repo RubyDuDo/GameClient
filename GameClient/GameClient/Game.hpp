@@ -14,12 +14,15 @@
 #include <string>
 #include "TcpSocket.hpp"
 
-class Msg
+#include "./proto/msg.pb.h"
+#include "MsgQueue.hpp"
+
+using namespace MyGame;
+
+class ProtobufHelp
 {
 public:
-    Msg( const std::string& str ):m_strAction( str ){};
-    std::string m_strAction;
-    
+    static MsgHead* CreatePacketHead( MsgType type );
 };
 
 class CGame
@@ -29,22 +32,38 @@ public:
     
     void run();
     
-    void dispatchMsg(const Msg& msg);
-    
     void receiveThread();
     void sendThread();
     
     int InitNetwork();
 private:
-    void onReceiveMsg( const Msg& msg );
-private:
-    std::mutex m_mutex;
-    std::queue<Msg> m_msgs;
+    void onReceiveMsg( const string& msg );
     
-    std::mutex m_rmutex;
-    std::queue<Msg> m_rmsgs;
+private:
+    //all the request
+    void requestLogin( const std::string& strName, const std::string strPass);
+    void requestAction( const std::string strAction );
+    void requestLogout( );
+    
+    void addTcpQueue(  const Msg& msg );
+    
+private:
+    void dealRecvMsg( const Msg& msg );
+    // all the response deal
+    void onLogin( const Msg& msg);
+    void onAction( const Msg& msg );
+    void onLogout( const Msg& msg );
+    
+private:
+    MsgQueue<Msg> m_msgs;
+    
+    MsgQueue<Msg> m_rmsgs;
+
+    
     
     std::shared_ptr<TcpSocket> m_sock;
+    
+    int m_roleId = 0;
     
 };
 
