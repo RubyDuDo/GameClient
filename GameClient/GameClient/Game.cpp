@@ -237,6 +237,8 @@ void CGame::onLogin( const Msg& msg)
         return;
     }
     
+    m_roleId = login.roleid();
+    
     cout<<"Role ID:"<< login.roleid()<<"_ level: "<<login.rolelevel()<<endl;
 }
 void CGame::onAction( const Msg& msg )
