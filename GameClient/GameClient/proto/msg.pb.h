@@ -53,6 +53,12 @@ extern MsgDefaultTypeInternal _Msg_default_instance_;
 class MsgHead;
 struct MsgHeadDefaultTypeInternal;
 extern MsgHeadDefaultTypeInternal _MsgHead_default_instance_;
+class MsgRsp;
+struct MsgRspDefaultTypeInternal;
+extern MsgRspDefaultTypeInternal _MsgRsp_default_instance_;
+class MsgRspHead;
+struct MsgRspHeadDefaultTypeInternal;
+extern MsgRspHeadDefaultTypeInternal _MsgRspHead_default_instance_;
 class RequestAct;
 struct RequestActDefaultTypeInternal;
 extern RequestActDefaultTypeInternal _RequestAct_default_instance_;
@@ -75,6 +81,8 @@ extern ResponseLogoutDefaultTypeInternal _ResponseLogout_default_instance_;
 PROTOBUF_NAMESPACE_OPEN
 template<> ::MyGame::Msg* Arena::CreateMaybeMessage<::MyGame::Msg>(Arena*);
 template<> ::MyGame::MsgHead* Arena::CreateMaybeMessage<::MyGame::MsgHead>(Arena*);
+template<> ::MyGame::MsgRsp* Arena::CreateMaybeMessage<::MyGame::MsgRsp>(Arena*);
+template<> ::MyGame::MsgRspHead* Arena::CreateMaybeMessage<::MyGame::MsgRspHead>(Arena*);
 template<> ::MyGame::RequestAct* Arena::CreateMaybeMessage<::MyGame::RequestAct>(Arena*);
 template<> ::MyGame::RequestLogin* Arena::CreateMaybeMessage<::MyGame::RequestLogin>(Arena*);
 template<> ::MyGame::RequestLogout* Arena::CreateMaybeMessage<::MyGame::RequestLogout>(Arena*);
@@ -110,6 +118,33 @@ inline bool MsgType_Parse(
     ::PROTOBUF_NAMESPACE_ID::ConstStringParam name, MsgType* value) {
   return ::PROTOBUF_NAMESPACE_ID::internal::ParseNamedEnum<MsgType>(
     MsgType_descriptor(), name, value);
+}
+enum MsgErrCode : int {
+  MsgErr_OK = 0,
+  MsgErr_Fail = 1,
+  MsgErr_NotExist = 2,
+  MsgErr_PasswdWrong = 3,
+  MsgErrCode_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::min(),
+  MsgErrCode_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::max()
+};
+bool MsgErrCode_IsValid(int value);
+constexpr MsgErrCode MsgErrCode_MIN = MsgErr_OK;
+constexpr MsgErrCode MsgErrCode_MAX = MsgErr_PasswdWrong;
+constexpr int MsgErrCode_ARRAYSIZE = MsgErrCode_MAX + 1;
+
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* MsgErrCode_descriptor();
+template<typename T>
+inline const std::string& MsgErrCode_Name(T enum_t_value) {
+  static_assert(::std::is_same<T, MsgErrCode>::value ||
+    ::std::is_integral<T>::value,
+    "Incorrect type passed to function MsgErrCode_Name.");
+  return ::PROTOBUF_NAMESPACE_ID::internal::NameOfEnum(
+    MsgErrCode_descriptor(), enum_t_value);
+}
+inline bool MsgErrCode_Parse(
+    ::PROTOBUF_NAMESPACE_ID::ConstStringParam name, MsgErrCode* value) {
+  return ::PROTOBUF_NAMESPACE_ID::internal::ParseNamedEnum<MsgErrCode>(
+    MsgErrCode_descriptor(), name, value);
 }
 // ===================================================================
 
@@ -256,6 +291,160 @@ class MsgHead final :
 };
 // -------------------------------------------------------------------
 
+class MsgRspHead final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:MyGame.MsgRspHead) */ {
+ public:
+  inline MsgRspHead() : MsgRspHead(nullptr) {}
+  ~MsgRspHead() override;
+  explicit PROTOBUF_CONSTEXPR MsgRspHead(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  MsgRspHead(const MsgRspHead& from);
+  MsgRspHead(MsgRspHead&& from) noexcept
+    : MsgRspHead() {
+    *this = ::std::move(from);
+  }
+
+  inline MsgRspHead& operator=(const MsgRspHead& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline MsgRspHead& operator=(MsgRspHead&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const MsgRspHead& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const MsgRspHead* internal_default_instance() {
+    return reinterpret_cast<const MsgRspHead*>(
+               &_MsgRspHead_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    1;
+
+  friend void swap(MsgRspHead& a, MsgRspHead& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(MsgRspHead* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(MsgRspHead* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  MsgRspHead* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<MsgRspHead>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CopyFrom(const MsgRspHead& from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  void MergeFrom(const MsgRspHead& from);
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message* to, const ::PROTOBUF_NAMESPACE_ID::Message& from);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  uint8_t* _InternalSerialize(
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(MsgRspHead* other);
+
+  private:
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "MyGame.MsgRspHead";
+  }
+  protected:
+  explicit MsgRspHead(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                       bool is_message_owned = false);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kTypeFieldNumber = 1,
+    kResFieldNumber = 2,
+  };
+  // .MyGame.MsgType type = 1;
+  void clear_type();
+  ::MyGame::MsgType type() const;
+  void set_type(::MyGame::MsgType value);
+  private:
+  ::MyGame::MsgType _internal_type() const;
+  void _internal_set_type(::MyGame::MsgType value);
+  public:
+
+  // .MyGame.MsgErrCode res = 2;
+  void clear_res();
+  ::MyGame::MsgErrCode res() const;
+  void set_res(::MyGame::MsgErrCode value);
+  private:
+  ::MyGame::MsgErrCode _internal_res() const;
+  void _internal_set_res(::MyGame::MsgErrCode value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:MyGame.MsgRspHead)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  int type_;
+  int res_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_msg_2eproto;
+};
+// -------------------------------------------------------------------
+
 class RequestLogin final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:MyGame.RequestLogin) */ {
  public:
@@ -304,7 +493,7 @@ class RequestLogin final :
                &_RequestLogin_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    1;
+    2;
 
   friend void swap(RequestLogin& a, RequestLogin& b) {
     a.Swap(&b);
@@ -468,7 +657,7 @@ class ResponseLogin final :
                &_ResponseLogin_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    2;
+    3;
 
   friend void swap(ResponseLogin& a, ResponseLogin& b) {
     a.Swap(&b);
@@ -622,7 +811,7 @@ class RequestLogout final :
                &_RequestLogout_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    3;
+    4;
 
   friend void swap(RequestLogout& a, RequestLogout& b) {
     a.Swap(&b);
@@ -765,7 +954,7 @@ class ResponseLogout final :
                &_ResponseLogout_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    4;
+    5;
 
   friend void swap(ResponseLogout& a, ResponseLogout& b) {
     a.Swap(&b);
@@ -908,7 +1097,7 @@ class RequestAct final :
                &_RequestAct_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    5;
+    6;
 
   friend void swap(RequestAct& a, RequestAct& b) {
     a.Swap(&b);
@@ -1056,7 +1245,7 @@ class ResponseAct final :
                &_ResponseAct_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    6;
+    7;
 
   friend void swap(ResponseAct& a, ResponseAct& b) {
     a.Swap(&b);
@@ -1204,7 +1393,7 @@ class Msg final :
                &_Msg_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    7;
+    8;
 
   friend void swap(Msg& a, Msg& b) {
     a.Swap(&b);
@@ -1326,6 +1515,178 @@ class Msg final :
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_msg_2eproto;
 };
+// -------------------------------------------------------------------
+
+class MsgRsp final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:MyGame.MsgRsp) */ {
+ public:
+  inline MsgRsp() : MsgRsp(nullptr) {}
+  ~MsgRsp() override;
+  explicit PROTOBUF_CONSTEXPR MsgRsp(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  MsgRsp(const MsgRsp& from);
+  MsgRsp(MsgRsp&& from) noexcept
+    : MsgRsp() {
+    *this = ::std::move(from);
+  }
+
+  inline MsgRsp& operator=(const MsgRsp& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline MsgRsp& operator=(MsgRsp&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const MsgRsp& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const MsgRsp* internal_default_instance() {
+    return reinterpret_cast<const MsgRsp*>(
+               &_MsgRsp_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    9;
+
+  friend void swap(MsgRsp& a, MsgRsp& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(MsgRsp* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(MsgRsp* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  MsgRsp* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<MsgRsp>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CopyFrom(const MsgRsp& from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  void MergeFrom(const MsgRsp& from);
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message* to, const ::PROTOBUF_NAMESPACE_ID::Message& from);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  uint8_t* _InternalSerialize(
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(MsgRsp* other);
+
+  private:
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "MyGame.MsgRsp";
+  }
+  protected:
+  explicit MsgRsp(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                       bool is_message_owned = false);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kHeadFieldNumber = 1,
+    kPayloadFieldNumber = 2,
+  };
+  // .MyGame.MsgRspHead head = 1;
+  bool has_head() const;
+  private:
+  bool _internal_has_head() const;
+  public:
+  void clear_head();
+  const ::MyGame::MsgRspHead& head() const;
+  PROTOBUF_NODISCARD ::MyGame::MsgRspHead* release_head();
+  ::MyGame::MsgRspHead* mutable_head();
+  void set_allocated_head(::MyGame::MsgRspHead* head);
+  private:
+  const ::MyGame::MsgRspHead& _internal_head() const;
+  ::MyGame::MsgRspHead* _internal_mutable_head();
+  public:
+  void unsafe_arena_set_allocated_head(
+      ::MyGame::MsgRspHead* head);
+  ::MyGame::MsgRspHead* unsafe_arena_release_head();
+
+  // .google.protobuf.Any payload = 2;
+  bool has_payload() const;
+  private:
+  bool _internal_has_payload() const;
+  public:
+  void clear_payload();
+  const ::PROTOBUF_NAMESPACE_ID::Any& payload() const;
+  PROTOBUF_NODISCARD ::PROTOBUF_NAMESPACE_ID::Any* release_payload();
+  ::PROTOBUF_NAMESPACE_ID::Any* mutable_payload();
+  void set_allocated_payload(::PROTOBUF_NAMESPACE_ID::Any* payload);
+  private:
+  const ::PROTOBUF_NAMESPACE_ID::Any& _internal_payload() const;
+  ::PROTOBUF_NAMESPACE_ID::Any* _internal_mutable_payload();
+  public:
+  void unsafe_arena_set_allocated_payload(
+      ::PROTOBUF_NAMESPACE_ID::Any* payload);
+  ::PROTOBUF_NAMESPACE_ID::Any* unsafe_arena_release_payload();
+
+  // @@protoc_insertion_point(class_scope:MyGame.MsgRsp)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  ::MyGame::MsgRspHead* head_;
+  ::PROTOBUF_NAMESPACE_ID::Any* payload_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_msg_2eproto;
+};
 // ===================================================================
 
 
@@ -1355,6 +1716,50 @@ inline void MsgHead::_internal_set_type(::MyGame::MsgType value) {
 inline void MsgHead::set_type(::MyGame::MsgType value) {
   _internal_set_type(value);
   // @@protoc_insertion_point(field_set:MyGame.MsgHead.type)
+}
+
+// -------------------------------------------------------------------
+
+// MsgRspHead
+
+// .MyGame.MsgType type = 1;
+inline void MsgRspHead::clear_type() {
+  type_ = 0;
+}
+inline ::MyGame::MsgType MsgRspHead::_internal_type() const {
+  return static_cast< ::MyGame::MsgType >(type_);
+}
+inline ::MyGame::MsgType MsgRspHead::type() const {
+  // @@protoc_insertion_point(field_get:MyGame.MsgRspHead.type)
+  return _internal_type();
+}
+inline void MsgRspHead::_internal_set_type(::MyGame::MsgType value) {
+  
+  type_ = value;
+}
+inline void MsgRspHead::set_type(::MyGame::MsgType value) {
+  _internal_set_type(value);
+  // @@protoc_insertion_point(field_set:MyGame.MsgRspHead.type)
+}
+
+// .MyGame.MsgErrCode res = 2;
+inline void MsgRspHead::clear_res() {
+  res_ = 0;
+}
+inline ::MyGame::MsgErrCode MsgRspHead::_internal_res() const {
+  return static_cast< ::MyGame::MsgErrCode >(res_);
+}
+inline ::MyGame::MsgErrCode MsgRspHead::res() const {
+  // @@protoc_insertion_point(field_get:MyGame.MsgRspHead.res)
+  return _internal_res();
+}
+inline void MsgRspHead::_internal_set_res(::MyGame::MsgErrCode value) {
+  
+  res_ = value;
+}
+inline void MsgRspHead::set_res(::MyGame::MsgErrCode value) {
+  _internal_set_res(value);
+  // @@protoc_insertion_point(field_set:MyGame.MsgRspHead.res)
 }
 
 // -------------------------------------------------------------------
@@ -1840,9 +2245,192 @@ inline void Msg::set_allocated_payload(::PROTOBUF_NAMESPACE_ID::Any* payload) {
   // @@protoc_insertion_point(field_set_allocated:MyGame.Msg.payload)
 }
 
+// -------------------------------------------------------------------
+
+// MsgRsp
+
+// .MyGame.MsgRspHead head = 1;
+inline bool MsgRsp::_internal_has_head() const {
+  return this != internal_default_instance() && head_ != nullptr;
+}
+inline bool MsgRsp::has_head() const {
+  return _internal_has_head();
+}
+inline void MsgRsp::clear_head() {
+  if (GetArenaForAllocation() == nullptr && head_ != nullptr) {
+    delete head_;
+  }
+  head_ = nullptr;
+}
+inline const ::MyGame::MsgRspHead& MsgRsp::_internal_head() const {
+  const ::MyGame::MsgRspHead* p = head_;
+  return p != nullptr ? *p : reinterpret_cast<const ::MyGame::MsgRspHead&>(
+      ::MyGame::_MsgRspHead_default_instance_);
+}
+inline const ::MyGame::MsgRspHead& MsgRsp::head() const {
+  // @@protoc_insertion_point(field_get:MyGame.MsgRsp.head)
+  return _internal_head();
+}
+inline void MsgRsp::unsafe_arena_set_allocated_head(
+    ::MyGame::MsgRspHead* head) {
+  if (GetArenaForAllocation() == nullptr) {
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(head_);
+  }
+  head_ = head;
+  if (head) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:MyGame.MsgRsp.head)
+}
+inline ::MyGame::MsgRspHead* MsgRsp::release_head() {
+  
+  ::MyGame::MsgRspHead* temp = head_;
+  head_ = nullptr;
+#ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
+  auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
+  temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  if (GetArenaForAllocation() == nullptr) { delete old; }
+#else  // PROTOBUF_FORCE_COPY_IN_RELEASE
+  if (GetArenaForAllocation() != nullptr) {
+    temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  }
+#endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
+  return temp;
+}
+inline ::MyGame::MsgRspHead* MsgRsp::unsafe_arena_release_head() {
+  // @@protoc_insertion_point(field_release:MyGame.MsgRsp.head)
+  
+  ::MyGame::MsgRspHead* temp = head_;
+  head_ = nullptr;
+  return temp;
+}
+inline ::MyGame::MsgRspHead* MsgRsp::_internal_mutable_head() {
+  
+  if (head_ == nullptr) {
+    auto* p = CreateMaybeMessage<::MyGame::MsgRspHead>(GetArenaForAllocation());
+    head_ = p;
+  }
+  return head_;
+}
+inline ::MyGame::MsgRspHead* MsgRsp::mutable_head() {
+  ::MyGame::MsgRspHead* _msg = _internal_mutable_head();
+  // @@protoc_insertion_point(field_mutable:MyGame.MsgRsp.head)
+  return _msg;
+}
+inline void MsgRsp::set_allocated_head(::MyGame::MsgRspHead* head) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
+  if (message_arena == nullptr) {
+    delete head_;
+  }
+  if (head) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
+        ::PROTOBUF_NAMESPACE_ID::Arena::InternalGetOwningArena(head);
+    if (message_arena != submessage_arena) {
+      head = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, head, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  head_ = head;
+  // @@protoc_insertion_point(field_set_allocated:MyGame.MsgRsp.head)
+}
+
+// .google.protobuf.Any payload = 2;
+inline bool MsgRsp::_internal_has_payload() const {
+  return this != internal_default_instance() && payload_ != nullptr;
+}
+inline bool MsgRsp::has_payload() const {
+  return _internal_has_payload();
+}
+inline const ::PROTOBUF_NAMESPACE_ID::Any& MsgRsp::_internal_payload() const {
+  const ::PROTOBUF_NAMESPACE_ID::Any* p = payload_;
+  return p != nullptr ? *p : reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Any&>(
+      ::PROTOBUF_NAMESPACE_ID::_Any_default_instance_);
+}
+inline const ::PROTOBUF_NAMESPACE_ID::Any& MsgRsp::payload() const {
+  // @@protoc_insertion_point(field_get:MyGame.MsgRsp.payload)
+  return _internal_payload();
+}
+inline void MsgRsp::unsafe_arena_set_allocated_payload(
+    ::PROTOBUF_NAMESPACE_ID::Any* payload) {
+  if (GetArenaForAllocation() == nullptr) {
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(payload_);
+  }
+  payload_ = payload;
+  if (payload) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:MyGame.MsgRsp.payload)
+}
+inline ::PROTOBUF_NAMESPACE_ID::Any* MsgRsp::release_payload() {
+  
+  ::PROTOBUF_NAMESPACE_ID::Any* temp = payload_;
+  payload_ = nullptr;
+#ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
+  auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
+  temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  if (GetArenaForAllocation() == nullptr) { delete old; }
+#else  // PROTOBUF_FORCE_COPY_IN_RELEASE
+  if (GetArenaForAllocation() != nullptr) {
+    temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  }
+#endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
+  return temp;
+}
+inline ::PROTOBUF_NAMESPACE_ID::Any* MsgRsp::unsafe_arena_release_payload() {
+  // @@protoc_insertion_point(field_release:MyGame.MsgRsp.payload)
+  
+  ::PROTOBUF_NAMESPACE_ID::Any* temp = payload_;
+  payload_ = nullptr;
+  return temp;
+}
+inline ::PROTOBUF_NAMESPACE_ID::Any* MsgRsp::_internal_mutable_payload() {
+  
+  if (payload_ == nullptr) {
+    auto* p = CreateMaybeMessage<::PROTOBUF_NAMESPACE_ID::Any>(GetArenaForAllocation());
+    payload_ = p;
+  }
+  return payload_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::Any* MsgRsp::mutable_payload() {
+  ::PROTOBUF_NAMESPACE_ID::Any* _msg = _internal_mutable_payload();
+  // @@protoc_insertion_point(field_mutable:MyGame.MsgRsp.payload)
+  return _msg;
+}
+inline void MsgRsp::set_allocated_payload(::PROTOBUF_NAMESPACE_ID::Any* payload) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
+  if (message_arena == nullptr) {
+    delete reinterpret_cast< ::PROTOBUF_NAMESPACE_ID::MessageLite*>(payload_);
+  }
+  if (payload) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
+        ::PROTOBUF_NAMESPACE_ID::Arena::InternalGetOwningArena(
+                reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(payload));
+    if (message_arena != submessage_arena) {
+      payload = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, payload, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  payload_ = payload;
+  // @@protoc_insertion_point(field_set_allocated:MyGame.MsgRsp.payload)
+}
+
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------
@@ -1868,6 +2456,11 @@ template <> struct is_proto_enum< ::MyGame::MsgType> : ::std::true_type {};
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::MyGame::MsgType>() {
   return ::MyGame::MsgType_descriptor();
+}
+template <> struct is_proto_enum< ::MyGame::MsgErrCode> : ::std::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::MyGame::MsgErrCode>() {
+  return ::MyGame::MsgErrCode_descriptor();
 }
 
 PROTOBUF_NAMESPACE_CLOSE

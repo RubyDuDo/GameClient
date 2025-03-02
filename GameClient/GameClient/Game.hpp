@@ -23,6 +23,7 @@ class ProtobufHelp
 {
 public:
     static MsgHead* CreatePacketHead( MsgType type );
+    static MsgRspHead* CreateRspHead( MsgType type, MsgErrCode res );
 };
 
 class CGame
@@ -48,16 +49,16 @@ private:
     void addTcpQueue(  const Msg& msg );
     
 private:
-    void dealRecvMsg( const Msg& msg );
+    void dealRecvMsg( const MsgRsp& msg );
     // all the response deal
-    void onLogin( const Msg& msg);
-    void onAction( const Msg& msg );
-    void onLogout( const Msg& msg );
+    void onLogin( const MsgRsp& msg);
+    void onAction( const MsgRsp& msg );
+    void onLogout( const MsgRsp& msg );
     
 private:
     MsgQueue<Msg> m_msgs;
     
-    MsgQueue<Msg> m_rmsgs;
+    MsgQueue<MsgRsp> m_rmsgs;
 
     
     

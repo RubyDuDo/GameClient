@@ -34,6 +34,21 @@ struct MsgHeadDefaultTypeInternal {
   };
 };
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 MsgHeadDefaultTypeInternal _MsgHead_default_instance_;
+PROTOBUF_CONSTEXPR MsgRspHead::MsgRspHead(
+    ::_pbi::ConstantInitialized)
+  : type_(0)
+
+  , res_(0)
+{}
+struct MsgRspHeadDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR MsgRspHeadDefaultTypeInternal()
+      : _instance(::_pbi::ConstantInitialized{}) {}
+  ~MsgRspHeadDefaultTypeInternal() {}
+  union {
+    MsgRspHead _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 MsgRspHeadDefaultTypeInternal _MsgRspHead_default_instance_;
 PROTOBUF_CONSTEXPR RequestLogin::RequestLogin(
     ::_pbi::ConstantInitialized)
   : strname_(&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{})
@@ -121,9 +136,22 @@ struct MsgDefaultTypeInternal {
   };
 };
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 MsgDefaultTypeInternal _Msg_default_instance_;
+PROTOBUF_CONSTEXPR MsgRsp::MsgRsp(
+    ::_pbi::ConstantInitialized)
+  : head_(nullptr)
+  , payload_(nullptr){}
+struct MsgRspDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR MsgRspDefaultTypeInternal()
+      : _instance(::_pbi::ConstantInitialized{}) {}
+  ~MsgRspDefaultTypeInternal() {}
+  union {
+    MsgRsp _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 MsgRspDefaultTypeInternal _MsgRsp_default_instance_;
 }  // namespace MyGame
-static ::_pb::Metadata file_level_metadata_msg_2eproto[8];
-static const ::_pb::EnumDescriptor* file_level_enum_descriptors_msg_2eproto[1];
+static ::_pb::Metadata file_level_metadata_msg_2eproto[10];
+static const ::_pb::EnumDescriptor* file_level_enum_descriptors_msg_2eproto[2];
 static constexpr ::_pb::ServiceDescriptor const** file_level_service_descriptors_msg_2eproto = nullptr;
 
 const uint32_t TableStruct_msg_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
@@ -134,6 +162,14 @@ const uint32_t TableStruct_msg_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(prot
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
   PROTOBUF_FIELD_OFFSET(::MyGame::MsgHead, type_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::MyGame::MsgRspHead, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  ~0u,  // no _inlined_string_donated_
+  PROTOBUF_FIELD_OFFSET(::MyGame::MsgRspHead, type_),
+  PROTOBUF_FIELD_OFFSET(::MyGame::MsgRspHead, res_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::MyGame::RequestLogin, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -186,20 +222,31 @@ const uint32_t TableStruct_msg_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(prot
   ~0u,  // no _inlined_string_donated_
   PROTOBUF_FIELD_OFFSET(::MyGame::Msg, head_),
   PROTOBUF_FIELD_OFFSET(::MyGame::Msg, payload_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::MyGame::MsgRsp, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  ~0u,  // no _inlined_string_donated_
+  PROTOBUF_FIELD_OFFSET(::MyGame::MsgRsp, head_),
+  PROTOBUF_FIELD_OFFSET(::MyGame::MsgRsp, payload_),
 };
 static const ::_pbi::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, -1, sizeof(::MyGame::MsgHead)},
-  { 7, -1, -1, sizeof(::MyGame::RequestLogin)},
-  { 15, -1, -1, sizeof(::MyGame::ResponseLogin)},
-  { 23, -1, -1, sizeof(::MyGame::RequestLogout)},
-  { 30, -1, -1, sizeof(::MyGame::ResponseLogout)},
-  { 37, -1, -1, sizeof(::MyGame::RequestAct)},
-  { 44, -1, -1, sizeof(::MyGame::ResponseAct)},
-  { 51, -1, -1, sizeof(::MyGame::Msg)},
+  { 7, -1, -1, sizeof(::MyGame::MsgRspHead)},
+  { 15, -1, -1, sizeof(::MyGame::RequestLogin)},
+  { 23, -1, -1, sizeof(::MyGame::ResponseLogin)},
+  { 31, -1, -1, sizeof(::MyGame::RequestLogout)},
+  { 38, -1, -1, sizeof(::MyGame::ResponseLogout)},
+  { 45, -1, -1, sizeof(::MyGame::RequestAct)},
+  { 52, -1, -1, sizeof(::MyGame::ResponseAct)},
+  { 59, -1, -1, sizeof(::MyGame::Msg)},
+  { 67, -1, -1, sizeof(::MyGame::MsgRsp)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
   &::MyGame::_MsgHead_default_instance_._instance,
+  &::MyGame::_MsgRspHead_default_instance_._instance,
   &::MyGame::_RequestLogin_default_instance_._instance,
   &::MyGame::_ResponseLogin_default_instance_._instance,
   &::MyGame::_RequestLogout_default_instance_._instance,
@@ -207,31 +254,38 @@ static const ::_pb::Message* const file_default_instances[] = {
   &::MyGame::_RequestAct_default_instance_._instance,
   &::MyGame::_ResponseAct_default_instance_._instance,
   &::MyGame::_Msg_default_instance_._instance,
+  &::MyGame::_MsgRsp_default_instance_._instance,
 };
 
 const char descriptor_table_protodef_msg_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
   "\n\tmsg.proto\022\006MyGame\032\031google/protobuf/any"
   ".proto\"(\n\007MsgHead\022\035\n\004type\030\001 \001(\0162\017.MyGame"
-  ".MsgType\"0\n\014RequestLogin\022\017\n\007strName\030\001 \001("
-  "\t\022\017\n\007strPass\030\002 \001(\t\"2\n\rResponseLogin\022\016\n\006r"
-  "oleId\030\001 \001(\005\022\021\n\troleLevel\030\002 \001(\005\"\037\n\rReques"
-  "tLogout\022\016\n\006roleId\030\001 \001(\005\" \n\016ResponseLogou"
-  "t\022\016\n\006roleId\030\001 \001(\005\"\034\n\nRequestAct\022\016\n\006actio"
-  "n\030\001 \001(\t\"\035\n\013ResponseAct\022\016\n\006action\030\001 \001(\t\"K"
-  "\n\003Msg\022\035\n\004head\030\001 \001(\0132\017.MyGame.MsgHead\022%\n\007"
-  "payload\030\002 \001(\0132\024.google.protobuf.Any*V\n\007M"
-  "sgType\022\023\n\017MsgType_Default\020\000\022\021\n\rMsgType_L"
-  "ogin\020\001\022\022\n\016MsgType_Logout\020\002\022\017\n\013MsgType_Ac"
-  "t\020\003b\006proto3"
+  ".MsgType\"L\n\nMsgRspHead\022\035\n\004type\030\001 \001(\0162\017.M"
+  "yGame.MsgType\022\037\n\003res\030\002 \001(\0162\022.MyGame.MsgE"
+  "rrCode\"0\n\014RequestLogin\022\017\n\007strName\030\001 \001(\t\022"
+  "\017\n\007strPass\030\002 \001(\t\"2\n\rResponseLogin\022\016\n\006rol"
+  "eId\030\001 \001(\005\022\021\n\troleLevel\030\002 \001(\005\"\037\n\rRequestL"
+  "ogout\022\016\n\006roleId\030\001 \001(\005\" \n\016ResponseLogout\022"
+  "\016\n\006roleId\030\001 \001(\005\"\034\n\nRequestAct\022\016\n\006action\030"
+  "\001 \001(\t\"\035\n\013ResponseAct\022\016\n\006action\030\001 \001(\t\"K\n\003"
+  "Msg\022\035\n\004head\030\001 \001(\0132\017.MyGame.MsgHead\022%\n\007pa"
+  "yload\030\002 \001(\0132\024.google.protobuf.Any\"Q\n\006Msg"
+  "Rsp\022 \n\004head\030\001 \001(\0132\022.MyGame.MsgRspHead\022%\n"
+  "\007payload\030\002 \001(\0132\024.google.protobuf.Any*V\n\007"
+  "MsgType\022\023\n\017MsgType_Default\020\000\022\021\n\rMsgType_"
+  "Login\020\001\022\022\n\016MsgType_Logout\020\002\022\017\n\013MsgType_A"
+  "ct\020\003*Y\n\nMsgErrCode\022\r\n\tMsgErr_OK\020\000\022\017\n\013Msg"
+  "Err_Fail\020\001\022\023\n\017MsgErr_NotExist\020\002\022\026\n\022MsgEr"
+  "r_PasswdWrong\020\003b\006proto3"
   ;
 static const ::_pbi::DescriptorTable* const descriptor_table_msg_2eproto_deps[1] = {
   &::descriptor_table_google_2fprotobuf_2fany_2eproto,
 };
 static ::_pbi::once_flag descriptor_table_msg_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_msg_2eproto = {
-    false, false, 491, descriptor_table_protodef_msg_2eproto,
+    false, false, 743, descriptor_table_protodef_msg_2eproto,
     "msg.proto",
-    &descriptor_table_msg_2eproto_once, descriptor_table_msg_2eproto_deps, 1, 8,
+    &descriptor_table_msg_2eproto_once, descriptor_table_msg_2eproto_deps, 1, 10,
     schemas, file_default_instances, TableStruct_msg_2eproto::offsets,
     file_level_metadata_msg_2eproto, file_level_enum_descriptors_msg_2eproto,
     file_level_service_descriptors_msg_2eproto,
@@ -248,6 +302,22 @@ const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* MsgType_descriptor() {
   return file_level_enum_descriptors_msg_2eproto[0];
 }
 bool MsgType_IsValid(int value) {
+  switch (value) {
+    case 0:
+    case 1:
+    case 2:
+    case 3:
+      return true;
+    default:
+      return false;
+  }
+}
+
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* MsgErrCode_descriptor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_msg_2eproto);
+  return file_level_enum_descriptors_msg_2eproto[1];
+}
+bool MsgErrCode_IsValid(int value) {
   switch (value) {
     case 0:
     case 1:
@@ -432,6 +502,217 @@ void MsgHead::InternalSwap(MsgHead* other) {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_msg_2eproto_getter, &descriptor_table_msg_2eproto_once,
       file_level_metadata_msg_2eproto[0]);
+}
+
+// ===================================================================
+
+class MsgRspHead::_Internal {
+ public:
+};
+
+MsgRspHead::MsgRspHead(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                         bool is_message_owned)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
+  SharedCtor();
+  // @@protoc_insertion_point(arena_constructor:MyGame.MsgRspHead)
+}
+MsgRspHead::MsgRspHead(const MsgRspHead& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  ::memcpy(&type_, &from.type_,
+    static_cast<size_t>(reinterpret_cast<char*>(&res_) -
+    reinterpret_cast<char*>(&type_)) + sizeof(res_));
+  // @@protoc_insertion_point(copy_constructor:MyGame.MsgRspHead)
+}
+
+inline void MsgRspHead::SharedCtor() {
+::memset(reinterpret_cast<char*>(this) + static_cast<size_t>(
+    reinterpret_cast<char*>(&type_) - reinterpret_cast<char*>(this)),
+    0, static_cast<size_t>(reinterpret_cast<char*>(&res_) -
+    reinterpret_cast<char*>(&type_)) + sizeof(res_));
+}
+
+MsgRspHead::~MsgRspHead() {
+  // @@protoc_insertion_point(destructor:MyGame.MsgRspHead)
+  if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
+  (void)arena;
+    return;
+  }
+  SharedDtor();
+}
+
+inline void MsgRspHead::SharedDtor() {
+  GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
+}
+
+void MsgRspHead::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+
+void MsgRspHead::Clear() {
+// @@protoc_insertion_point(message_clear_start:MyGame.MsgRspHead)
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  ::memset(&type_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&res_) -
+      reinterpret_cast<char*>(&type_)) + sizeof(res_));
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* MsgRspHead::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    uint32_t tag;
+    ptr = ::_pbi::ReadTag(ptr, &tag);
+    switch (tag >> 3) {
+      // .MyGame.MsgType type = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 8)) {
+          uint64_t val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+          _internal_set_type(static_cast<::MyGame::MsgType>(val));
+        } else
+          goto handle_unusual;
+        continue;
+      // .MyGame.MsgErrCode res = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 16)) {
+          uint64_t val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+          _internal_set_res(static_cast<::MyGame::MsgErrCode>(val));
+        } else
+          goto handle_unusual;
+        continue;
+      default:
+        goto handle_unusual;
+    }  // switch
+  handle_unusual:
+    if ((tag == 0) || ((tag & 7) == 4)) {
+      CHK_(ptr);
+      ctx->SetLastTag(tag);
+      goto message_done;
+    }
+    ptr = UnknownFieldParse(
+        tag,
+        _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+        ptr, ctx);
+    CHK_(ptr != nullptr);
+  }  // while
+message_done:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto message_done;
+#undef CHK_
+}
+
+uint8_t* MsgRspHead::_InternalSerialize(
+    uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:MyGame.MsgRspHead)
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // .MyGame.MsgType type = 1;
+  if (this->_internal_type() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteEnumToArray(
+      1, this->_internal_type(), target);
+  }
+
+  // .MyGame.MsgErrCode res = 2;
+  if (this->_internal_res() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteEnumToArray(
+      2, this->_internal_res(), target);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:MyGame.MsgRspHead)
+  return target;
+}
+
+size_t MsgRspHead::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:MyGame.MsgRspHead)
+  size_t total_size = 0;
+
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // .MyGame.MsgType type = 1;
+  if (this->_internal_type() != 0) {
+    total_size += 1 +
+      ::_pbi::WireFormatLite::EnumSize(this->_internal_type());
+  }
+
+  // .MyGame.MsgErrCode res = 2;
+  if (this->_internal_res() != 0) {
+    total_size += 1 +
+      ::_pbi::WireFormatLite::EnumSize(this->_internal_res());
+  }
+
+  return MaybeComputeUnknownFieldsSize(total_size, &_cached_size_);
+}
+
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData MsgRspHead::_class_data_ = {
+    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSizeCheck,
+    MsgRspHead::MergeImpl
+};
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*MsgRspHead::GetClassData() const { return &_class_data_; }
+
+void MsgRspHead::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message* to,
+                      const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+  static_cast<MsgRspHead *>(to)->MergeFrom(
+      static_cast<const MsgRspHead &>(from));
+}
+
+
+void MsgRspHead::MergeFrom(const MsgRspHead& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:MyGame.MsgRspHead)
+  GOOGLE_DCHECK_NE(&from, this);
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from._internal_type() != 0) {
+    _internal_set_type(from._internal_type());
+  }
+  if (from._internal_res() != 0) {
+    _internal_set_res(from._internal_res());
+  }
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void MsgRspHead::CopyFrom(const MsgRspHead& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:MyGame.MsgRspHead)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool MsgRspHead::IsInitialized() const {
+  return true;
+}
+
+void MsgRspHead::InternalSwap(MsgRspHead* other) {
+  using std::swap;
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(MsgRspHead, res_)
+      + sizeof(MsgRspHead::res_)
+      - PROTOBUF_FIELD_OFFSET(MsgRspHead, type_)>(
+          reinterpret_cast<char*>(&type_),
+          reinterpret_cast<char*>(&other->type_));
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata MsgRspHead::GetMetadata() const {
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_msg_2eproto_getter, &descriptor_table_msg_2eproto_once,
+      file_level_metadata_msg_2eproto[1]);
 }
 
 // ===================================================================
@@ -674,7 +955,7 @@ void RequestLogin::InternalSwap(RequestLogin* other) {
 ::PROTOBUF_NAMESPACE_ID::Metadata RequestLogin::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_msg_2eproto_getter, &descriptor_table_msg_2eproto_once,
-      file_level_metadata_msg_2eproto[1]);
+      file_level_metadata_msg_2eproto[2]);
 }
 
 // ===================================================================
@@ -879,7 +1160,7 @@ void ResponseLogin::InternalSwap(ResponseLogin* other) {
 ::PROTOBUF_NAMESPACE_ID::Metadata ResponseLogin::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_msg_2eproto_getter, &descriptor_table_msg_2eproto_once,
-      file_level_metadata_msg_2eproto[2]);
+      file_level_metadata_msg_2eproto[3]);
 }
 
 // ===================================================================
@@ -1050,7 +1331,7 @@ void RequestLogout::InternalSwap(RequestLogout* other) {
 ::PROTOBUF_NAMESPACE_ID::Metadata RequestLogout::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_msg_2eproto_getter, &descriptor_table_msg_2eproto_once,
-      file_level_metadata_msg_2eproto[3]);
+      file_level_metadata_msg_2eproto[4]);
 }
 
 // ===================================================================
@@ -1221,7 +1502,7 @@ void ResponseLogout::InternalSwap(ResponseLogout* other) {
 ::PROTOBUF_NAMESPACE_ID::Metadata ResponseLogout::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_msg_2eproto_getter, &descriptor_table_msg_2eproto_once,
-      file_level_metadata_msg_2eproto[4]);
+      file_level_metadata_msg_2eproto[5]);
 }
 
 // ===================================================================
@@ -1416,7 +1697,7 @@ void RequestAct::InternalSwap(RequestAct* other) {
 ::PROTOBUF_NAMESPACE_ID::Metadata RequestAct::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_msg_2eproto_getter, &descriptor_table_msg_2eproto_once,
-      file_level_metadata_msg_2eproto[5]);
+      file_level_metadata_msg_2eproto[6]);
 }
 
 // ===================================================================
@@ -1611,7 +1892,7 @@ void ResponseAct::InternalSwap(ResponseAct* other) {
 ::PROTOBUF_NAMESPACE_ID::Metadata ResponseAct::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_msg_2eproto_getter, &descriptor_table_msg_2eproto_once,
-      file_level_metadata_msg_2eproto[6]);
+      file_level_metadata_msg_2eproto[7]);
 }
 
 // ===================================================================
@@ -1852,7 +2133,248 @@ void Msg::InternalSwap(Msg* other) {
 ::PROTOBUF_NAMESPACE_ID::Metadata Msg::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_msg_2eproto_getter, &descriptor_table_msg_2eproto_once,
-      file_level_metadata_msg_2eproto[7]);
+      file_level_metadata_msg_2eproto[8]);
+}
+
+// ===================================================================
+
+class MsgRsp::_Internal {
+ public:
+  static const ::MyGame::MsgRspHead& head(const MsgRsp* msg);
+  static const ::PROTOBUF_NAMESPACE_ID::Any& payload(const MsgRsp* msg);
+};
+
+const ::MyGame::MsgRspHead&
+MsgRsp::_Internal::head(const MsgRsp* msg) {
+  return *msg->head_;
+}
+const ::PROTOBUF_NAMESPACE_ID::Any&
+MsgRsp::_Internal::payload(const MsgRsp* msg) {
+  return *msg->payload_;
+}
+void MsgRsp::clear_payload() {
+  if (GetArenaForAllocation() == nullptr && payload_ != nullptr) {
+    delete payload_;
+  }
+  payload_ = nullptr;
+}
+MsgRsp::MsgRsp(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                         bool is_message_owned)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
+  SharedCtor();
+  // @@protoc_insertion_point(arena_constructor:MyGame.MsgRsp)
+}
+MsgRsp::MsgRsp(const MsgRsp& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  if (from._internal_has_head()) {
+    head_ = new ::MyGame::MsgRspHead(*from.head_);
+  } else {
+    head_ = nullptr;
+  }
+  if (from._internal_has_payload()) {
+    payload_ = new ::PROTOBUF_NAMESPACE_ID::Any(*from.payload_);
+  } else {
+    payload_ = nullptr;
+  }
+  // @@protoc_insertion_point(copy_constructor:MyGame.MsgRsp)
+}
+
+inline void MsgRsp::SharedCtor() {
+::memset(reinterpret_cast<char*>(this) + static_cast<size_t>(
+    reinterpret_cast<char*>(&head_) - reinterpret_cast<char*>(this)),
+    0, static_cast<size_t>(reinterpret_cast<char*>(&payload_) -
+    reinterpret_cast<char*>(&head_)) + sizeof(payload_));
+}
+
+MsgRsp::~MsgRsp() {
+  // @@protoc_insertion_point(destructor:MyGame.MsgRsp)
+  if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
+  (void)arena;
+    return;
+  }
+  SharedDtor();
+}
+
+inline void MsgRsp::SharedDtor() {
+  GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
+  if (this != internal_default_instance()) delete head_;
+  if (this != internal_default_instance()) delete payload_;
+}
+
+void MsgRsp::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+
+void MsgRsp::Clear() {
+// @@protoc_insertion_point(message_clear_start:MyGame.MsgRsp)
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  if (GetArenaForAllocation() == nullptr && head_ != nullptr) {
+    delete head_;
+  }
+  head_ = nullptr;
+  if (GetArenaForAllocation() == nullptr && payload_ != nullptr) {
+    delete payload_;
+  }
+  payload_ = nullptr;
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* MsgRsp::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    uint32_t tag;
+    ptr = ::_pbi::ReadTag(ptr, &tag);
+    switch (tag >> 3) {
+      // .MyGame.MsgRspHead head = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
+          ptr = ctx->ParseMessage(_internal_mutable_head(), ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // .google.protobuf.Any payload = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 18)) {
+          ptr = ctx->ParseMessage(_internal_mutable_payload(), ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      default:
+        goto handle_unusual;
+    }  // switch
+  handle_unusual:
+    if ((tag == 0) || ((tag & 7) == 4)) {
+      CHK_(ptr);
+      ctx->SetLastTag(tag);
+      goto message_done;
+    }
+    ptr = UnknownFieldParse(
+        tag,
+        _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+        ptr, ctx);
+    CHK_(ptr != nullptr);
+  }  // while
+message_done:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto message_done;
+#undef CHK_
+}
+
+uint8_t* MsgRsp::_InternalSerialize(
+    uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:MyGame.MsgRsp)
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // .MyGame.MsgRspHead head = 1;
+  if (this->_internal_has_head()) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(1, _Internal::head(this),
+        _Internal::head(this).GetCachedSize(), target, stream);
+  }
+
+  // .google.protobuf.Any payload = 2;
+  if (this->_internal_has_payload()) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(2, _Internal::payload(this),
+        _Internal::payload(this).GetCachedSize(), target, stream);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:MyGame.MsgRsp)
+  return target;
+}
+
+size_t MsgRsp::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:MyGame.MsgRsp)
+  size_t total_size = 0;
+
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // .MyGame.MsgRspHead head = 1;
+  if (this->_internal_has_head()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+        *head_);
+  }
+
+  // .google.protobuf.Any payload = 2;
+  if (this->_internal_has_payload()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+        *payload_);
+  }
+
+  return MaybeComputeUnknownFieldsSize(total_size, &_cached_size_);
+}
+
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData MsgRsp::_class_data_ = {
+    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSizeCheck,
+    MsgRsp::MergeImpl
+};
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*MsgRsp::GetClassData() const { return &_class_data_; }
+
+void MsgRsp::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message* to,
+                      const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+  static_cast<MsgRsp *>(to)->MergeFrom(
+      static_cast<const MsgRsp &>(from));
+}
+
+
+void MsgRsp::MergeFrom(const MsgRsp& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:MyGame.MsgRsp)
+  GOOGLE_DCHECK_NE(&from, this);
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from._internal_has_head()) {
+    _internal_mutable_head()->::MyGame::MsgRspHead::MergeFrom(from._internal_head());
+  }
+  if (from._internal_has_payload()) {
+    _internal_mutable_payload()->::PROTOBUF_NAMESPACE_ID::Any::MergeFrom(from._internal_payload());
+  }
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void MsgRsp::CopyFrom(const MsgRsp& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:MyGame.MsgRsp)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool MsgRsp::IsInitialized() const {
+  return true;
+}
+
+void MsgRsp::InternalSwap(MsgRsp* other) {
+  using std::swap;
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(MsgRsp, payload_)
+      + sizeof(MsgRsp::payload_)
+      - PROTOBUF_FIELD_OFFSET(MsgRsp, head_)>(
+          reinterpret_cast<char*>(&head_),
+          reinterpret_cast<char*>(&other->head_));
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata MsgRsp::GetMetadata() const {
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_msg_2eproto_getter, &descriptor_table_msg_2eproto_once,
+      file_level_metadata_msg_2eproto[9]);
 }
 
 // @@protoc_insertion_point(namespace_scope)
@@ -1861,6 +2383,10 @@ PROTOBUF_NAMESPACE_OPEN
 template<> PROTOBUF_NOINLINE ::MyGame::MsgHead*
 Arena::CreateMaybeMessage< ::MyGame::MsgHead >(Arena* arena) {
   return Arena::CreateMessageInternal< ::MyGame::MsgHead >(arena);
+}
+template<> PROTOBUF_NOINLINE ::MyGame::MsgRspHead*
+Arena::CreateMaybeMessage< ::MyGame::MsgRspHead >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::MyGame::MsgRspHead >(arena);
 }
 template<> PROTOBUF_NOINLINE ::MyGame::RequestLogin*
 Arena::CreateMaybeMessage< ::MyGame::RequestLogin >(Arena* arena) {
@@ -1889,6 +2415,10 @@ Arena::CreateMaybeMessage< ::MyGame::ResponseAct >(Arena* arena) {
 template<> PROTOBUF_NOINLINE ::MyGame::Msg*
 Arena::CreateMaybeMessage< ::MyGame::Msg >(Arena* arena) {
   return Arena::CreateMessageInternal< ::MyGame::Msg >(arena);
+}
+template<> PROTOBUF_NOINLINE ::MyGame::MsgRsp*
+Arena::CreateMaybeMessage< ::MyGame::MsgRsp >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::MyGame::MsgRsp >(arena);
 }
 PROTOBUF_NAMESPACE_CLOSE
 

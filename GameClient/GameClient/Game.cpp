@@ -21,7 +21,15 @@ MyGame::MsgHead* ProtobufHelp::CreatePacketHead( MsgType type )
     pHead->set_type( type );
     
     return pHead;
+}
+
+MsgRspHead* ProtobufHelp::CreateRspHead( MsgType type, MsgErrCode res )
+{
+    MsgRspHead* pHead = new MsgRspHead();
+    pHead->set_type( type );
+    pHead->set_res( res );
     
+    return pHead;
     
 }
 
@@ -198,7 +206,7 @@ void CGame::requestLogout( )
 
 void CGame::onReceiveMsg( const std::string& msg )
 {
-    Msg recvMsg;
+    MsgRsp recvMsg;
     if( !recvMsg.ParseFromArray( msg.c_str(),  msg.length() ) )
     {
         cout<<"onReceiveMsg Error, protobuf parse head fail"<<endl;
@@ -208,10 +216,10 @@ void CGame::onReceiveMsg( const std::string& msg )
     m_rmsgs.push( recvMsg );
 }
 
-void CGame::dealRecvMsg( const Msg& msg )
+void CGame::dealRecvMsg( const MsgRsp& msg )
 {
     //dispatch the msg according the type
-    cout<<"recvMsg:" << msg.head().type()<<endl;
+    cout<<"recvMsg:" << msg.head().type()<<"_err:"<<msg.head().res()<<endl;
     switch( msg.head().type() )
     {
     case MsgType_Login:
@@ -228,7 +236,7 @@ void CGame::dealRecvMsg( const Msg& msg )
     }
     
 }
-void CGame::onLogin( const Msg& msg)
+void CGame::onLogin( const MsgRsp& msg)
 {
     ResponseLogin login;
     if( !msg.payload().UnpackTo( &login ))
@@ -237,11 +245,16 @@ void CGame::onLogin( const Msg& msg)
         return;
     }
     
-    m_roleId = login.roleid();
+    if( msg.head().res() != MsgErr_OK )
+    {
+        cout<<"Login response fail:"<<msg.head().res()<<endl;
+        return;
+    }
     
-    cout<<"Role ID:"<< login.roleid()<<"_ level: "<<login.rolelevel()<<endl;
+    m_roleId = login.roleid();
+    cout<<"Login OK Role ID:"<< login.roleid()<<"_ level: "<<login.rolelevel()<<endl;
 }
-void CGame::onAction( const Msg& msg )
+void CGame::onAction( const MsgRsp& msg )
 {
     ResponseAct act;
     if( !msg.payload().UnpackTo( &act ))
@@ -253,7 +266,7 @@ void CGame::onAction( const Msg& msg )
     cout<<"Response Action:"<< act.action()<<endl;
     
 }
-void CGame::onLogout( const Msg& msg )
+void CGame::onLogout( const MsgRsp& msg )
 {
     ResponseLogout logout;
     if( !msg.payload().UnpackTo( &logout ))

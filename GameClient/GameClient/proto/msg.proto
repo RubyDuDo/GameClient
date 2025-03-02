@@ -10,9 +10,23 @@ enum MsgType
     MsgType_Act = 3;
 }
 
+enum MsgErrCode
+{
+    MsgErr_OK = 0;
+    MsgErr_Fail = 1;
+    MsgErr_NotExist = 2;
+    MsgErr_PasswdWrong = 3;
+}
+
 message MsgHead
 {
     MsgType type = 1;
+}
+
+message MsgRspHead
+{
+    MsgType type = 1;
+    MsgErrCode res = 2;
 }
 
 message RequestLogin
@@ -50,5 +64,11 @@ message ResponseAct
 message Msg
 {
     MsgHead head = 1;
+    google.protobuf.Any payload = 2;
+}
+
+message MsgRsp
+{
+    MsgRspHead head = 1;
     google.protobuf.Any payload = 2;
 }
