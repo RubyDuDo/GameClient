@@ -64,7 +64,7 @@ private:
     
     std::shared_ptr<TcpSocket> m_sock;
     
-    int m_roleId = 0;
+    uint64_t m_roleId = 0;
     
 };
 

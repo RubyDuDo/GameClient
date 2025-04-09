@@ -10,10 +10,14 @@
 #include <thread>
 #include "Buffer.hpp"
 
+
+
 using namespace std;
 
-constexpr short SVR_PORT = 8081;
-constexpr std::string SVR_IP = "127.0.0.1";
+const short SVR_PORT = 8081;
+const std::string SVR_IP = "127.0.0.1";
+//const std::string SVR_IP = "10.0.0.243";
+
 
 MyGame::MsgHead* ProtobufHelp::CreatePacketHead( MsgType type )
 {
@@ -70,6 +74,12 @@ void CGame::run()
     cin>>strName>>strPass;
     requestLogin( strName, strPass );
     
+    auto pMsg = m_rmsgs.wait_and_pop();
+    if( pMsg )
+    {
+        dealRecvMsg( *pMsg );
+    }
+    
     while( true )
     {
         string str;
@@ -80,14 +90,12 @@ void CGame::run()
         {
             requestLogout();
         }
-        else if( str == "" )
-        {
-            continue;
-        }
-        else
+        else if( str != "" )
         {
             requestAction( str );
         }
+        
+        
         
         //
         auto pMsg = m_rmsgs.wait_and_pop();
@@ -95,6 +103,8 @@ void CGame::run()
         {
             dealRecvMsg( *pMsg );
         }
+        
+        cout<<"One Loop End!"<<endl;
     }
     
     cout<<"Game ends!"<<endl;
@@ -275,6 +285,6 @@ void CGame::onLogout( const MsgRsp& msg )
         return;
     }
     
-    cout<<"Role ID:"<< logout.roleid()<<endl;
+    cout<<"onLogout::Role ID:"<< logout.roleid()<<endl;
     
 }

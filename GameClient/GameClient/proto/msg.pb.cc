@@ -64,7 +64,7 @@ struct RequestLoginDefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 RequestLoginDefaultTypeInternal _RequestLogin_default_instance_;
 PROTOBUF_CONSTEXPR ResponseLogin::ResponseLogin(
     ::_pbi::ConstantInitialized)
-  : roleid_(0)
+  : roleid_(uint64_t{0u})
   , rolelevel_(0){}
 struct ResponseLoginDefaultTypeInternal {
   PROTOBUF_CONSTEXPR ResponseLoginDefaultTypeInternal()
@@ -77,7 +77,7 @@ struct ResponseLoginDefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 ResponseLoginDefaultTypeInternal _ResponseLogin_default_instance_;
 PROTOBUF_CONSTEXPR RequestLogout::RequestLogout(
     ::_pbi::ConstantInitialized)
-  : roleid_(0){}
+  : roleid_(uint64_t{0u}){}
 struct RequestLogoutDefaultTypeInternal {
   PROTOBUF_CONSTEXPR RequestLogoutDefaultTypeInternal()
       : _instance(::_pbi::ConstantInitialized{}) {}
@@ -89,7 +89,7 @@ struct RequestLogoutDefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 RequestLogoutDefaultTypeInternal _RequestLogout_default_instance_;
 PROTOBUF_CONSTEXPR ResponseLogout::ResponseLogout(
     ::_pbi::ConstantInitialized)
-  : roleid_(0){}
+  : roleid_(uint64_t{0u}){}
 struct ResponseLogoutDefaultTypeInternal {
   PROTOBUF_CONSTEXPR ResponseLogoutDefaultTypeInternal()
       : _instance(::_pbi::ConstantInitialized{}) {}
@@ -264,9 +264,9 @@ const char descriptor_table_protodef_msg_2eproto[] PROTOBUF_SECTION_VARIABLE(pro
   "yGame.MsgType\022\037\n\003res\030\002 \001(\0162\022.MyGame.MsgE"
   "rrCode\"0\n\014RequestLogin\022\017\n\007strName\030\001 \001(\t\022"
   "\017\n\007strPass\030\002 \001(\t\"2\n\rResponseLogin\022\016\n\006rol"
-  "eId\030\001 \001(\005\022\021\n\troleLevel\030\002 \001(\005\"\037\n\rRequestL"
-  "ogout\022\016\n\006roleId\030\001 \001(\005\" \n\016ResponseLogout\022"
-  "\016\n\006roleId\030\001 \001(\005\"\034\n\nRequestAct\022\016\n\006action\030"
+  "eId\030\001 \001(\004\022\021\n\troleLevel\030\002 \001(\005\"\037\n\rRequestL"
+  "ogout\022\016\n\006roleId\030\001 \001(\004\" \n\016ResponseLogout\022"
+  "\016\n\006roleId\030\001 \001(\004\"\034\n\nRequestAct\022\016\n\006action\030"
   "\001 \001(\t\"\035\n\013ResponseAct\022\016\n\006action\030\001 \001(\t\"K\n\003"
   "Msg\022\035\n\004head\030\001 \001(\0132\017.MyGame.MsgHead\022%\n\007pa"
   "yload\030\002 \001(\0132\024.google.protobuf.Any\"Q\n\006Msg"
@@ -1021,10 +1021,10 @@ const char* ResponseLogin::_InternalParse(const char* ptr, ::_pbi::ParseContext*
     uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
-      // int32 roleId = 1;
+      // uint64 roleId = 1;
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 8)) {
-          roleid_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
+          roleid_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
@@ -1066,10 +1066,10 @@ uint8_t* ResponseLogin::_InternalSerialize(
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // int32 roleId = 1;
+  // uint64 roleId = 1;
   if (this->_internal_roleid() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteInt32ToArray(1, this->_internal_roleid(), target);
+    target = ::_pbi::WireFormatLite::WriteUInt64ToArray(1, this->_internal_roleid(), target);
   }
 
   // int32 roleLevel = 2;
@@ -1094,9 +1094,9 @@ size_t ResponseLogin::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // int32 roleId = 1;
+  // uint64 roleId = 1;
   if (this->_internal_roleid() != 0) {
-    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_roleid());
+    total_size += ::_pbi::WireFormatLite::UInt64SizePlusOne(this->_internal_roleid());
   }
 
   // int32 roleLevel = 2;
@@ -1183,7 +1183,7 @@ RequestLogout::RequestLogout(const RequestLogout& from)
 }
 
 inline void RequestLogout::SharedCtor() {
-roleid_ = 0;
+roleid_ = uint64_t{0u};
 }
 
 RequestLogout::~RequestLogout() {
@@ -1209,7 +1209,7 @@ void RequestLogout::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  roleid_ = 0;
+  roleid_ = uint64_t{0u};
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -1219,10 +1219,10 @@ const char* RequestLogout::_InternalParse(const char* ptr, ::_pbi::ParseContext*
     uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
-      // int32 roleId = 1;
+      // uint64 roleId = 1;
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 8)) {
-          roleid_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
+          roleid_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
@@ -1256,10 +1256,10 @@ uint8_t* RequestLogout::_InternalSerialize(
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // int32 roleId = 1;
+  // uint64 roleId = 1;
   if (this->_internal_roleid() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteInt32ToArray(1, this->_internal_roleid(), target);
+    target = ::_pbi::WireFormatLite::WriteUInt64ToArray(1, this->_internal_roleid(), target);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -1278,9 +1278,9 @@ size_t RequestLogout::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // int32 roleId = 1;
+  // uint64 roleId = 1;
   if (this->_internal_roleid() != 0) {
-    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_roleid());
+    total_size += ::_pbi::WireFormatLite::UInt64SizePlusOne(this->_internal_roleid());
   }
 
   return MaybeComputeUnknownFieldsSize(total_size, &_cached_size_);
@@ -1354,7 +1354,7 @@ ResponseLogout::ResponseLogout(const ResponseLogout& from)
 }
 
 inline void ResponseLogout::SharedCtor() {
-roleid_ = 0;
+roleid_ = uint64_t{0u};
 }
 
 ResponseLogout::~ResponseLogout() {
@@ -1380,7 +1380,7 @@ void ResponseLogout::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  roleid_ = 0;
+  roleid_ = uint64_t{0u};
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -1390,10 +1390,10 @@ const char* ResponseLogout::_InternalParse(const char* ptr, ::_pbi::ParseContext
     uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
-      // int32 roleId = 1;
+      // uint64 roleId = 1;
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 8)) {
-          roleid_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
+          roleid_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
@@ -1427,10 +1427,10 @@ uint8_t* ResponseLogout::_InternalSerialize(
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // int32 roleId = 1;
+  // uint64 roleId = 1;
   if (this->_internal_roleid() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteInt32ToArray(1, this->_internal_roleid(), target);
+    target = ::_pbi::WireFormatLite::WriteUInt64ToArray(1, this->_internal_roleid(), target);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -1449,9 +1449,9 @@ size_t ResponseLogout::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // int32 roleId = 1;
+  // uint64 roleId = 1;
   if (this->_internal_roleid() != 0) {
-    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_roleid());
+    total_size += ::_pbi::WireFormatLite::UInt64SizePlusOne(this->_internal_roleid());
   }
 
   return MaybeComputeUnknownFieldsSize(total_size, &_cached_size_);

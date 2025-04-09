@@ -37,18 +37,18 @@ message RequestLogin
 
 message ResponseLogin
 {
-    int32 roleId = 1;
+    uint64 roleId = 1;
     int32 roleLevel = 2;
 }
 
 message RequestLogout
 {
-    int32 roleId = 1;
+    uint64 roleId = 1;
 }
 
 message ResponseLogout
 {
-    int32 roleId = 1;
+    uint64 roleId = 1;
 }
 
 message RequestAct

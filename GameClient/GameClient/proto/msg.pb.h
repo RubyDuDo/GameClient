@@ -731,13 +731,13 @@ class ResponseLogin final :
     kRoleIdFieldNumber = 1,
     kRoleLevelFieldNumber = 2,
   };
-  // int32 roleId = 1;
+  // uint64 roleId = 1;
   void clear_roleid();
-  int32_t roleid() const;
-  void set_roleid(int32_t value);
+  uint64_t roleid() const;
+  void set_roleid(uint64_t value);
   private:
-  int32_t _internal_roleid() const;
-  void _internal_set_roleid(int32_t value);
+  uint64_t _internal_roleid() const;
+  void _internal_set_roleid(uint64_t value);
   public:
 
   // int32 roleLevel = 2;
@@ -756,7 +756,7 @@ class ResponseLogin final :
   template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
-  int32_t roleid_;
+  uint64_t roleid_;
   int32_t rolelevel_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_msg_2eproto;
@@ -884,13 +884,13 @@ class RequestLogout final :
   enum : int {
     kRoleIdFieldNumber = 1,
   };
-  // int32 roleId = 1;
+  // uint64 roleId = 1;
   void clear_roleid();
-  int32_t roleid() const;
-  void set_roleid(int32_t value);
+  uint64_t roleid() const;
+  void set_roleid(uint64_t value);
   private:
-  int32_t _internal_roleid() const;
-  void _internal_set_roleid(int32_t value);
+  uint64_t _internal_roleid() const;
+  void _internal_set_roleid(uint64_t value);
   public:
 
   // @@protoc_insertion_point(class_scope:MyGame.RequestLogout)
@@ -900,7 +900,7 @@ class RequestLogout final :
   template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
-  int32_t roleid_;
+  uint64_t roleid_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_msg_2eproto;
 };
@@ -1027,13 +1027,13 @@ class ResponseLogout final :
   enum : int {
     kRoleIdFieldNumber = 1,
   };
-  // int32 roleId = 1;
+  // uint64 roleId = 1;
   void clear_roleid();
-  int32_t roleid() const;
-  void set_roleid(int32_t value);
+  uint64_t roleid() const;
+  void set_roleid(uint64_t value);
   private:
-  int32_t _internal_roleid() const;
-  void _internal_set_roleid(int32_t value);
+  uint64_t _internal_roleid() const;
+  void _internal_set_roleid(uint64_t value);
   public:
 
   // @@protoc_insertion_point(class_scope:MyGame.ResponseLogout)
@@ -1043,7 +1043,7 @@ class ResponseLogout final :
   template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
-  int32_t roleid_;
+  uint64_t roleid_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_msg_2eproto;
 };
@@ -1870,22 +1870,22 @@ inline void RequestLogin::set_allocated_strpass(std::string* strpass) {
 
 // ResponseLogin
 
-// int32 roleId = 1;
+// uint64 roleId = 1;
 inline void ResponseLogin::clear_roleid() {
-  roleid_ = 0;
+  roleid_ = uint64_t{0u};
 }
-inline int32_t ResponseLogin::_internal_roleid() const {
+inline uint64_t ResponseLogin::_internal_roleid() const {
   return roleid_;
 }
-inline int32_t ResponseLogin::roleid() const {
+inline uint64_t ResponseLogin::roleid() const {
   // @@protoc_insertion_point(field_get:MyGame.ResponseLogin.roleId)
   return _internal_roleid();
 }
-inline void ResponseLogin::_internal_set_roleid(int32_t value) {
+inline void ResponseLogin::_internal_set_roleid(uint64_t value) {
   
   roleid_ = value;
 }
-inline void ResponseLogin::set_roleid(int32_t value) {
+inline void ResponseLogin::set_roleid(uint64_t value) {
   _internal_set_roleid(value);
   // @@protoc_insertion_point(field_set:MyGame.ResponseLogin.roleId)
 }
@@ -1914,22 +1914,22 @@ inline void ResponseLogin::set_rolelevel(int32_t value) {
 
 // RequestLogout
 
-// int32 roleId = 1;
+// uint64 roleId = 1;
 inline void RequestLogout::clear_roleid() {
-  roleid_ = 0;
+  roleid_ = uint64_t{0u};
 }
-inline int32_t RequestLogout::_internal_roleid() const {
+inline uint64_t RequestLogout::_internal_roleid() const {
   return roleid_;
 }
-inline int32_t RequestLogout::roleid() const {
+inline uint64_t RequestLogout::roleid() const {
   // @@protoc_insertion_point(field_get:MyGame.RequestLogout.roleId)
   return _internal_roleid();
 }
-inline void RequestLogout::_internal_set_roleid(int32_t value) {
+inline void RequestLogout::_internal_set_roleid(uint64_t value) {
   
   roleid_ = value;
 }
-inline void RequestLogout::set_roleid(int32_t value) {
+inline void RequestLogout::set_roleid(uint64_t value) {
   _internal_set_roleid(value);
   // @@protoc_insertion_point(field_set:MyGame.RequestLogout.roleId)
 }
@@ -1938,22 +1938,22 @@ inline void RequestLogout::set_roleid(int32_t value) {
 
 // ResponseLogout
 
-// int32 roleId = 1;
+// uint64 roleId = 1;
 inline void ResponseLogout::clear_roleid() {
-  roleid_ = 0;
+  roleid_ = uint64_t{0u};
 }
-inline int32_t ResponseLogout::_internal_roleid() const {
+inline uint64_t ResponseLogout::_internal_roleid() const {
   return roleid_;
 }
-inline int32_t ResponseLogout::roleid() const {
+inline uint64_t ResponseLogout::roleid() const {
   // @@protoc_insertion_point(field_get:MyGame.ResponseLogout.roleId)
   return _internal_roleid();
 }
-inline void ResponseLogout::_internal_set_roleid(int32_t value) {
+inline void ResponseLogout::_internal_set_roleid(uint64_t value) {
   
   roleid_ = value;
 }
-inline void ResponseLogout::set_roleid(int32_t value) {
+inline void ResponseLogout::set_roleid(uint64_t value) {
   _internal_set_roleid(value);
   // @@protoc_insertion_point(field_set:MyGame.ResponseLogout.roleId)
 }
